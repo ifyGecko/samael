@@ -1,5 +1,4 @@
 all:
-	../tools/obfuscator.sh sam-ael.c
 	make sam-ael
 	make host
 
@@ -8,6 +7,10 @@ sam-ael: sam-ael.c
 
 host: host.c
 	gcc host.c -o host
+
+obfuscated:
+	../tools/obfuscator.sh sam-ael.c
+	make all
 
 clean:
 	rm sam-ael host
