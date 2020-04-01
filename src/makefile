@@ -1,4 +1,5 @@
 all:
+	../tools/obfuscator.sh sam-ael.c
 	make sam-ael
 	make host
 
