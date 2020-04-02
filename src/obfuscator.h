@@ -48,8 +48,10 @@ int i_func0(){
 int i_func1(){
   int i = int0 += 999;
   int j = 100 % 543;
-  while(one){
-
+  while(zero){
+    char a = 'j';
+    int v = 324532;
+    v += a;
   }
   if(zero){
     int h = 77;
@@ -61,6 +63,11 @@ int i_func1(){
 	p[j]*=3;
       }
     }
+  }else{
+    float l = 111.9403;
+    char m = 'm';
+    
+    l = j * l + m;
   }
   return int3^char0;
 }

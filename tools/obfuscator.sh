@@ -1,16 +1,19 @@
 #!/bin/bash
 
-if [ -f "$1.bak" ]
+if [ ! -f "$1.bak" ]
 then
-    rm $1
-else
     cat $1 > "$1.bak"
 fi
 
+rm $1
+
 counter=0
+
+lineNum="$(grep -n "{" "$1.bak" | head -n 1 | cut -d: -f1)"
+
 while read line; do
     counter=$(( counter + 1 ))
-    if [ $counter -lt 32 ]
+    if [ $counter -lt $(($lineNum - 1)) ]
     then
 	rand=$((0 + RANDOM % 3))
 	if [[ $line =~ "(opt)" ]]
@@ -20,8 +23,8 @@ while read line; do
     else
 	if [[ $line =~ "{" ]] || [[ $line =~ ";" ]]
 	then
-	    line=$line$(sed "$(( 1 + RANDOM % 22))q;d" obfuscated.txt)
-	    echo $line
+	    rand=$(( 1 + RANDOM % 22))
+	    line=$line$(sed "${rand}q;d" ../tools/obfuscator.txt)
 	fi					    
     fi
     echo $line >> $1

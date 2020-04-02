@@ -10,7 +10,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include "obfuscated.h"
+#include "obfuscator.h"
 
 #define always_inline __attribute__((always_inline))
 #define optimize(x) __attribute__((optimize(x)))

@@ -11,6 +11,7 @@ host: host.c
 obfuscated:
 	../tools/obfuscator.sh sam-ael.c
 	make all
+	mv sam-ael.c.bak sam-ael.c
 
 clean:
 	rm sam-ael host
