@@ -3,8 +3,8 @@ all:
 	make bind_shell
 
 obfuscated:
-	../tools/obfuscator.sh reverse_shell.c
-	../tools/obfuscator.sh bind_shell.c
+	../tools/obfuscator/obfuscator.sh reverse_shell.c
+	../tools/obfuscator/obfuscator.sh bind_shell.c
 	make all
 	mv reverse_shell.c.bak reverse_shell.c
 	mv bind_shell.c.bak bind_shell.c

