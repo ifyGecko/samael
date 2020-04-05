@@ -23,8 +23,10 @@ then
     exit
 else
     choice=$(printf "../payloads/$(sed "${choice}q;d" /tmp/tmp.txt)")
-fi
+fi  
 
 # send file size then file
 file_size=$(stat --printf="%s" $choice)
 cat <(printf "%013d" $file_size) <(cat $choice) - | nc 127.0.0.1 1337
+
+#nc 127.0.0.1 1234

