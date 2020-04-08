@@ -25,6 +25,25 @@ volatile double double4 = 383893.33333;
 volatile int zero = 0;
 volatile int one = 1;
 
+void __attribute__((naked)) foo(){
+  asm(".byte 90\n\t"
+      ".byte 90\n\t");
+}
+
+void __attribute__((always_inline)) static inline desync(){
+  int a = 13;
+  asm volatile("cmp %%rax, %%rax\n\t"
+	       "jne label%=\n\t"
+	       ".byte 10\n\t"
+	       ".byte 25\n\t"
+	       ".byte 00\n\t"
+	       ".byte 04\n\t"
+	       ".byte 00\n\t"
+	       ".byte 00\n\t"
+	       "label%=:"
+	       ::"r" (a));  
+}
+
 int i_func0(){
   int a = 66;
   int b = 44;
@@ -53,6 +72,7 @@ int i_func1(){
     int v = 324532;
     v += a;
   }
+  int a = 13;
   if(zero){
     int h = 77;
     if(char0^h == float2){
@@ -66,12 +86,38 @@ int i_func1(){
   }else{
     float l = 111.9403;
     char m = 'm';
-    
     l = j * l + m;
   }
   return int3^char0;
 }
 
 int i_func2(){
+  int a = 24532;
+  while(zero){
+    if(a == 2*zero){
+      int b = 23;
+      b += a;
+      return b;
+    }
+  }
+  if(zero){
+    return 3214;
+  }
   return 0;
+}
+
+int i_func3(){
+  int a = 3;
+  if(zero){
+    return 2304;
+  }
+  return 24839;
+}
+
+int i_func4(){
+  int a = 3;
+  if(zero){
+    return 2090;
+  }
+  return 8282;
 }
