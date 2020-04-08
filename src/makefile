@@ -1,12 +1,9 @@
 all:
 	make sam-ael
-	make host
 
 sam-ael: sam-ael.c
 	gcc -ldl sam-ael.c -o sam-ael
-
-host: host.c
-	gcc host.c -o host
+	strip --strip-all sam-ael
 
 obfuscated:
 	../tools/obfuscator/obfuscator.sh sam-ael.c
@@ -14,4 +11,4 @@ obfuscated:
 	mv sam-ael.c.bak sam-ael.c
 
 clean:
-	rm sam-ael host
+	rm sam-ael

