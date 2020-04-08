@@ -6,6 +6,8 @@ obfuscated:
 	../tools/obfuscator/obfuscator.sh reverse_shell.c
 	../tools/obfuscator/obfuscator.sh bind_shell.c
 	make all
+	strip --strip-all reverse_shell.so
+	strip --strip-all bind_shell.so
 	mv reverse_shell.c.bak reverse_shell.c
 	mv bind_shell.c.bak bind_shell.c
 

