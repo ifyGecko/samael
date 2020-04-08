@@ -30,7 +30,7 @@ void __attribute__((naked)) foo(){
       ".byte 90\n\t");
 }
 
-void __attribute__((always_inline)) static inline desync(){
+void __attribute__((always_inline)) static inline desync0(){
   int a = 13;
   asm volatile("cmp %%rax, %%rax\n\t"
 	       "jne label%=\n\t"
@@ -40,6 +40,62 @@ void __attribute__((always_inline)) static inline desync(){
 	       ".byte 04\n\t"
 	       ".byte 00\n\t"
 	       ".byte 00\n\t"
+	       "label%=:"
+	       ::"r" (a));  
+}
+
+void __attribute__((always_inline)) static inline desync1(){
+  int a = 13;
+  asm volatile("cmp %%rax, %%rax\n\t"
+	       "jne label%=\n\t"
+	       ".byte 10\n\t"
+	       ".byte 25\n\t"
+	       ".byte 56\n\t"
+	       ".byte 90\n\t"
+	       ".byte 01\n\t"
+	       ".byte 66\n\t"
+	       "label%=:"
+	       ::"r" (a));  
+}
+
+void __attribute__((always_inline)) static inline desync2(){
+  int a = 13;
+  asm volatile("cmp %%rax, %%rax\n\t"
+	       "jne label%=\n\t"
+	       ".byte 25\n\t"
+	       ".byte 87\n\t"
+	       ".byte 78\n\t"
+	       ".byte 23\n\t"
+	       ".byte 18\n\t"
+	       ".byte 56\n\t"
+	       "label%=:"
+	       ::"r" (a));  
+}
+
+void __attribute__((always_inline)) static inline desync3(){
+  int a = 13;
+  asm volatile("cmp %%rax, %%rax\n\t"
+	       "jne label%=\n\t"
+	       ".byte 19\n\t"
+	       ".byte 31\n\t"
+	       ".byte 57\n\t"
+	       ".byte 81\n\t"
+	       ".byte 00\n\t"
+	       ".byte 49\n\t"
+	       "label%=:"
+	       ::"r" (a));  
+}
+
+void __attribute__((always_inline)) static inline desync4(){
+  int a = 13;
+  asm volatile("cmp %%rax, %%rax\n\t"
+	       "jne label%=\n\t"
+	       ".byte 29\n\t"
+	       ".byte 05\n\t"
+	       ".byte 27\n\t"
+	       ".byte 12\n\t"
+	       ".byte 70\n\t"
+	       ".byte 02\n\t"
 	       "label%=:"
 	       ::"r" (a));  
 }
