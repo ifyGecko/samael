@@ -18,7 +18,8 @@ Features:
 	
 TODO:
 
-	1) comment and improve readability
-	2) error handling
-	3) anti-debugging && obfuscation
+	1) change sam-ael to connect to a C2
+	2) comment and improve readability
+	3) error handling
+	4) upgrade anti-debugging && obfuscation
 	

