@@ -1,14 +1,14 @@
 all:
-	make sam-ael
+	make samael
 
-sam-ael: sam-ael.c
-	gcc -ldl sam-ael.c -o sam-ael
+samael: samael.c
+	gcc -ldl samael.c -o samael
 
 obfuscated:
-	../tools/obfuscator/obfuscator.sh sam-ael.c
+	../tools/obfuscator/obfuscator.sh samael.c
 	make all
-	strip --strip-all sam-ael
-	mv sam-ael.c.bak sam-ael.c
+	strip --strip-all samael
+	mv samael.c.bak samael.c
 
 clean:
-	rm sam-ael
+	rm samael
