@@ -9,8 +9,8 @@ Disclaimer:
 Features:
 
 	* prepending ELF virus
-	* remote code execution via shared objects
-	* reverse/bind shell payload
+	* remote code execution via downloaded shared object payloads
+	* reverse/bind shell payloads
 	
 TODO:
 
