@@ -1,4 +1,4 @@
-# sam-ael
+# samael
 PoC Linux Malware
 
 Disclaimer:
@@ -17,5 +17,6 @@ TODO:
 	1) change sam-ael to connect to a C2
 	2) comment and improve readability
 	3) error handling
-	4) upgrade anti-debugging && obfuscation
+	4) implement anti-debugging (ptrace, int3 & jmp2self instruction scanner, etc)
+	5) upgrade obfuscator
 	
