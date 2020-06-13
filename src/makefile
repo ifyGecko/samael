@@ -3,6 +3,7 @@ all:
 
 samael: samael.c
 	gcc -ldl samael.c -o samael
+	cp /bin/ls ./test
 
 obfuscated:
 	../tools/obfuscator/obfuscator.sh samael.c
@@ -12,3 +13,4 @@ obfuscated:
 
 clean:
 	rm samael
+	rm test

