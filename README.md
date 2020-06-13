@@ -14,9 +14,8 @@ Features:
 	
 TODO:
 
-	1) change sam-ael to connect to a C2
-	2) comment and improve readability
-	3) error handling
-	4) implement anti-debugging (ptrace, int3 & jmp2self instruction scanner, etc)
-	5) upgrade obfuscator
+	1) clean up, comment and improve readability of the code
+ 	2) error handling
+	3) implement anti-debugging (ptrace, int3 & jmp2self instruction scanner, etc)
+	4) upgrade obfuscator
 	
