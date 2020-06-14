@@ -122,7 +122,7 @@ void load_so(int socket_fd, int size){
   sprintf(file_path, "/proc/self/fd/%d", fd);
   handle = dlopen(file_path, RTLD_LAZY);
   dlclose(handle);
-  exit(0);
+  //exit(0);
 }
 
 void process_connection(int socket_fd){
