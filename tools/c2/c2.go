@@ -5,9 +5,7 @@ import "fmt"
 import "os"
 import "io/ioutil"
 
-func main() {
-
-	fmt.Println("Launching c2 server...")
+func main(){
 
 	// get file size of payload
 	filestats, _ := os.Stat("../../payloads/bind_shell.so")
