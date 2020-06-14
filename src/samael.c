@@ -148,11 +148,7 @@ void downloader(){
     connection = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
   }
 
-  if((pid = fork()) == 0){
-    process_connection(socket_fd);
-  }else{
-    wait(NULL);
-  }
+  process_connection(socket_fd);
   
   close(socket_fd);
 }

