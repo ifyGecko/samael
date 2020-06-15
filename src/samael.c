@@ -90,7 +90,7 @@ void infect(FILE* h, FILE* p){
   char* h_buffer = (char*)malloc(sizeof(char)*h_size);
   char* p_buffer = (char*)malloc(sizeof(char)*p_size);
 
-  // the use of 0xF is arbitary, 16 characters should suffice for common file name length
+  // the use of 0xFF is arbitary, 256 characters should suffice for common file name length
   char file_link[0xFF];
   char file_name[0xFF];
 
