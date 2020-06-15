@@ -12,4 +12,4 @@ obfuscated:
 	mv samael.c.bak samael.c
 
 clean:
-	rm test
+	rm -f samael test
