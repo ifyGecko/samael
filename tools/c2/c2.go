@@ -26,7 +26,7 @@ func main(){
 	input = strings.Replace(input, "\n", "", -1)
 	index, _ := strconv.Atoi(input)
 	
-	// get file size of payload
+	// get file stats of payload
 	filestats, _ := os.Stat(payloads[index])
 
 	// get the size
