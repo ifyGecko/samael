@@ -18,4 +18,4 @@ bind_shell: bind_shell.c
 	gcc -shared -fPIC bind_shell.c -o bind_shell.so
 
 clean:
-	rm *.so
+	rm -f *.so
