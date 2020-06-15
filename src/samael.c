@@ -91,8 +91,8 @@ void infect(FILE* h, FILE* p){
   char* p_buffer = (char*)malloc(sizeof(char)*p_size);
 
   // the use of 0xF is arbitary, 16 characters should suffice for common file name length
-  char file_link[0xF];
-  char file_name[0xF];
+  char file_link[0xFF];
+  char file_name[0xFF];
 
   // read host and parasite into their respective buffers
   fread(h_buffer, sizeof(char), h_size, h);
