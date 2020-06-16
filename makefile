@@ -11,7 +11,7 @@ debug:
 obfuscated:
 	cd src/ && make
 	cd payloads/ && make obfuscated
-	cd tools/c2/ && make obfuscated
+	cd tools/c2/ && make
 
 clean:
 	cd src/ && make clean

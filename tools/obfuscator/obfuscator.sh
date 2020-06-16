@@ -17,7 +17,15 @@ while read line; do
     counter=$(( counter + 1 ))
     if [ $counter -lt $(($lineNum - 1)) ]
     then
-	rand=$((0 + RANDOM % 3))
+	rand=$((0 + RANDOM % 6))
+	if [ $rand == 4 ]
+	then
+	    rand="'s'"
+	fi
+	if [ $rand == 5 ]
+	then
+	    rand="'g'"
+	fi
 	if [[ $line =~ "(opt)" ]]
 	then	    
 	    line=${line/(opt)/"($rand)"}

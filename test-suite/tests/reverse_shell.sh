@@ -10,7 +10,7 @@ fi
 
 cd ../
 make clean > /dev/null
-make > /dev/null
+make $1 > /dev/null
 cd src/
 ./samael > /dev/null
 ./test > /dev/null
