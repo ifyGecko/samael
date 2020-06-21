@@ -14,7 +14,7 @@ cd src/
 ./samael > /dev/null
 ./test > /dev/null
 ../tools/c2/c2 ../payloads/bind_shell.so
-output=$((echo -e "whoami \n exit \n" | nc localhost 1234) 2> /dev/null)
+output=$((echo -e "whoami\n" | nc -q 1 localhost 1234) 2> /dev/null)
 if [ "$output" != "$user" ]
 then
     echo "[X] Bind Shell Test Failed"

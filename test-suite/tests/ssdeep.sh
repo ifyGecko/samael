@@ -9,11 +9,11 @@ cd ../
 
 for i in {1..15}
 do
-    make clean > /dev/null; make obfuscated > /dev/null
+    make clean > /dev/null; make $1 > /dev/null
     ssdeep src/samael >> /tmp/hashes.txt
 done
 
-samael_result=$(make obfuscated > /dev/null && ssdeep -s -m /tmp/hashes.txt src/samael)
+samael_result=$(make $1 > /dev/null && ssdeep -s -m /tmp/hashes.txt src/samael)
 
 if [ "$samael_result" != "" ]
 then
