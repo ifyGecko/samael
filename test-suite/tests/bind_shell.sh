@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 user=$(whoami) > /dev/null
 killall test 2> /dev/null
 
