@@ -9,7 +9,7 @@ debug:
 	cd tools/c2/ && make debug
 
 obfuscated:
-	cd src/ && make
+	cd src/ && make obfuscated
 	cd payloads/ && make obfuscated
 	cd tools/c2/ && make
 
