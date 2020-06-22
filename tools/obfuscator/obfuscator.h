@@ -1,3 +1,6 @@
+#ifndef OBFUSCATOR_H
+#define OBFUSCATOR_H
+
 volatile int int0 = 8340;
 volatile int int1 = 2983;
 volatile int int2 = 6243;
@@ -177,3 +180,5 @@ int i_func4(){
   }
   return 8282;
 }
+
+#endif
