@@ -7,11 +7,11 @@ extern volatile char* __etext;
 void __attribute__((constructor)) detect_breakpoints(){                        
   char* start = (char*)&_start;                             
   char* end = (char*)&__etext;                              
-  volatile unsigned char bppart[1] = { 0x66 };                  
-
+  volatile unsigned char int3 = 0x66;
+  
   while(start != end) {                                     
-    if(((*(volatile unsigned*)start++) & 0xFF) == ((*bppart) + (*bppart))){     
+    if(((*(volatile unsigned*)start++) & 0xFF) == (int3 + int3)){     
       exit(0);
-    }                                                     
-  }                                                         
+    }
+  }
 }
