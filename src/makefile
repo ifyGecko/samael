@@ -11,12 +11,15 @@ debug: samael.c
 
 obfuscated:
 	../tools/obfuscator/obfuscator.sh samael.c
+	cp ../tools/anti-debug/anti-debug.h ../tools/anti-debug/anti-debug.h.bak
+	../tools/obfuscator/obfuscator.sh ../tools/anti-debug/anti-debug.h
 	echo '#include "../tools/anti-debug/anti-debug.h"' >> samael.c
 	make all
 	../tools/anti-debug/anti-debug.sh
 	make clean; make all
 	strip --strip-all samael
 	mv samael.c.bak samael.c
+	mv ../tools/anti-debug/anti-debug.h.bak ../tools/anti-debug/anti-debug.h
 
 clean:
 	rm -f samael test

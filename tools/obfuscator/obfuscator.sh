@@ -7,7 +7,11 @@ fi
 
 rm $1
 
-echo '#include "../tools/obfuscator/obfuscator.h"' > $1
+header=$(find / -name obfuscator.h 2> /dev/null)
+
+header='#include "'$header'"'
+
+echo $header > $1
 
 counter=0
 
