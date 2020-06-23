@@ -14,11 +14,11 @@ Features:
 	* random junk code insertion
 	* optimization levels applied randomly per function
 	* minimal command & control server
+	* int3, breakpoint, scanner
 	
 TODO:
 
 	1) clean up, better comments and improve readability of the code
 	2) obfuscate strings
-	3) implement anti-debugging (ptrace, 0xCC & 0xEBFE instruction scanner, impossible disassembly, etc)
+	3) implement more anti-debugging (ptrace, 0xEBFE instruction scanner, impossible disassembly, etc)
 	4) c2 web control panel
-	5) error handling
