@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 
 // macro defining the number of 0xCC's found in the .text section, over written by anti-debug.sh
@@ -11,8 +10,7 @@ void __attribute__((constructor)) detect_breakpoints(){
   int counter = 0;
   char* start = (char*)&_start;                             
   char* end = (char*)&__etext;                              
-  unsigned char int3 = 0xCC; /* replace with rand() % 1024 - 155, first adjust anti-debug.sh to also
-				find 0xCC in all executable sections instead of only .text*/
+  unsigned char int3 = 0xCC;
 
   // check each byte of executable code for a possible int3, 0xCC, if so increment counter
   while(start != end){                                     
