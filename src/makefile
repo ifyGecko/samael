@@ -1,7 +1,4 @@
-all:
-	make samael
-
-samael: samael.c
+default: samael.c
 	gcc -ldl samael.c -o samael
 	cp /bin/ls ./test
 
@@ -14,9 +11,9 @@ obfuscated:
 	cp ../tools/anti-debug/anti-debug.h ../tools/anti-debug/anti-debug.h.bak
 	../tools/obfuscator/obfuscator.sh ../tools/anti-debug/anti-debug.h
 	echo '#include "../tools/anti-debug/anti-debug.h"' >> samael.c
-	make all
+	make
 	../tools/anti-debug/anti-debug.sh
-	make clean; make all
+	make clean; make
 	strip --strip-all samael
 	mv samael.c.bak samael.c
 	mv ../tools/anti-debug/anti-debug.h.bak ../tools/anti-debug/anti-debug.h

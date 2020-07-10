@@ -1,4 +1,4 @@
-all:
+default:
 	cd src/ && make
 	cd payloads/ && make
 	cd tools/c2/ && make
