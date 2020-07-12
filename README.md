@@ -6,6 +6,13 @@ Disclaimer:
 	The author is not responsible for any illegal use of this software or damage it could bring. It is only
 	provided as a proof of concept. Use at your own risk...
 
+Purpose:
+
+	Getting root in a boot2root challenge is a lot of fun but shouldn't there be more to learn and do next?
+	
+	This projects aims to be a utility for managing and maintaining control of a compromised host root account
+	in a simple yet educational manner.
+
 Features:
 
 	* prepending ELF virus
@@ -15,12 +22,3 @@ Features:
 	* optimization levels applied randomly per function
 	* minimal command & control server
 	* int3, breakpoint, scanner
-	
-TODO:
-
-	1) clean up, better comments and improve readability of the code
-	2) obfuscate strings
-	3) implement more anti-debugging (ptrace, 0xEBFE instruction scanner, etc)
-	4) c2 web control panel
-	5) integrate torsocks for c2 comm
-	6) support other C compilers (clang & tcc)
