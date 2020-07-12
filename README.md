@@ -20,5 +20,7 @@ TODO:
 
 	1) clean up, better comments and improve readability of the code
 	2) obfuscate strings
-	3) implement more anti-debugging (ptrace, 0xEBFE instruction scanner, impossible disassembly, etc)
+	3) implement more anti-debugging (ptrace, 0xEBFE instruction scanner, etc)
 	4) c2 web control panel
+	5) integrate torsocks for c2 comm
+	6) support other C compilers (clang & tcc)
