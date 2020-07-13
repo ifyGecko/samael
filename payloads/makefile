@@ -1,4 +1,4 @@
-all:
+default:
 	make reverse_shell
 	make bind_shell
 
@@ -15,7 +15,7 @@ bind_shell: bind_shell.c
 obfuscated:
 	../tools/obfuscator/obfuscator.sh reverse_shell.c
 	../tools/obfuscator/obfuscator.sh bind_shell.c
-	make all
+	make
 	strip --strip-all reverse_shell.so
 	strip --strip-all bind_shell.so
 	mv reverse_shell.c.bak reverse_shell.c
