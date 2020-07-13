@@ -6,8 +6,8 @@
 #define inc_at_head '+'
 #define dec_at_head '-'
 #define print_at_head '.'
-#define loop_start '['
-#define loop_end ']'
+#define start_loop '['
+#define end_loop ']'
 
 char* head;
 
@@ -21,12 +21,12 @@ void ebfin_halt(){
 
 void ebfin_eval(char* c){
   for(int i = 0 ; c[i] != '\0' ; ++i){
-    if(c[i] == '>') ++head;
-    else if(c[i] == '<') --head;
-    else if(c[i] == '+') ++*head;
-    else if(c[i] == '-') --*head;
-    else if(c[i] == '.') putchar(*head);
-    else if(c[i] == '['){
+    if(c[i] == fwd_head_mv) ++head;
+    else if(c[i] == bck_head_mv) --head;
+    else if(c[i] == inc_at_head) ++*head;
+    else if(c[i] == dec_at_head) --*head;
+    else if(c[i] == print_at_head) putchar(*head);
+    else if(c[i] == start_loop){
       if(*head == 0){
 	int j = 1;
 	while(j > 0){
@@ -36,7 +36,7 @@ void ebfin_eval(char* c){
 	}
       }
     }
-    else if(c[i] == ']'){
+    else if(c[i] == end_loop){
       if(*head != 0){
 	int j = 1;
 	while(j > 0){
