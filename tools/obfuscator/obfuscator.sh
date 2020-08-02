@@ -7,7 +7,7 @@ fi
 
 rm $1
 
-header=$(find / -name obfuscator.h 2> /dev/null)
+header=$(find /home -name obfuscator.h 2> /dev/null)
 
 header='#include "'$header'"'
 
