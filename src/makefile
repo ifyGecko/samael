@@ -1,5 +1,5 @@
 default: samael.c
-	gcc -g -ldl samael.c -o samael
+	gcc -ldl samael.c -o samael
 	cp /bin/ls ./test
 
 debug: samael.c
