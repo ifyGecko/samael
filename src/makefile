@@ -12,7 +12,7 @@ obfuscated:
 	../tools/obfuscator/obfuscator.sh ../tools/anti-debug/anti-debug.h
 	echo '#include "../tools/anti-debug/anti-debug.h"' >> samael.c
 	cp ../tools/hide-strings/hide-strings.h ../tools/hide-strings/hide-strings.h.bak
-	#../tools/obfuscator/obfuscator.sh ../tools/hide-strings/hide-strings.h
+	../tools/obfuscator/obfuscator.sh ../tools/hide-strings/hide-strings.h
 	../tools/hide-strings/hide-strings.sh samael.c
 	make
 	../tools/anti-debug/anti-debug.sh

@@ -17,7 +17,7 @@ counter=0
 
 lineNum="$(grep -n "{" "$1.bak" | head -n 1 | cut -d: -f1)"
 
-while read line; do
+while read -r line; do
     counter=$(( counter + 1 ))
     if [ $counter -lt $(($lineNum - 1)) ]
     then
