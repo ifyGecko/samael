@@ -32,5 +32,5 @@ while read -r line; do
 	    line=$line$(sed "${rand}q;d" ../tools/obfuscator/obfuscator.txt)
 	fi
     fi
-    echo $line >> $1
+    echo "$line" >> $1
 done < "$1.bak"
