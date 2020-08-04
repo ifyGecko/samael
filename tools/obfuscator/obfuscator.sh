@@ -1,9 +1,6 @@
 #!/bin/bash
 
-if [ ! -f "$1.bak" ]
-then
-    cat $1 > "$1.bak"
-fi
+cat $1 > "$1.bak"
 
 rm $1
 

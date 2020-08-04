@@ -1,9 +1,6 @@
 #!/bin/bash
 
-if [ ! -f "$1.bak" ]
-then
-    cat $1 > "$1.bak"
-fi
+cat $1 > "$1.tmp"
 
 rm $1
 
@@ -27,4 +24,6 @@ while read -r line; do
 	
     fi
     echo "${line}" >> $1
-done < "$1.bak"
+done < "$1.tmp"
+
+rm -f "$1.tmp"
