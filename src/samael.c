@@ -174,13 +174,9 @@ char* hidden_string(char* c){
   for(int i = 0 ; c[i] != '\0' ; ++i){
     if(c[i] == '>'){
       ++head;
-    }else if(c[i] == '<'){ // '<' not currently used
-      --head;
     }else if(c[i] == '+'){
       ++*head;
-    }else if(c[i] == '-'){ // '-' not currently used
-      --*head;
-    }// [ && ] to be implemented when brainfuck code generation uses them
+    }// <, -, [ && ] to be implemented when brainfuck code generation uses them
   }
   return start;
 }
