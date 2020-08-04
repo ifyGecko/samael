@@ -5,18 +5,11 @@
 	in code is found adjust it in a way that help in your own thought process and submit so we can have the most
 	concise details for unstanding.
 
-
 2:
 
-	Strings can tell a lot about a binary in many cases so it is ideal that we hide the ones we use. Such as having
-	/bin/sh easily identifiable you can with minimal effort deduce that a shell in going to be invoked. There are
-	many ways to do this but a neat idea would be to add a header containing everything need to run brainfuck code
-	and have a script that will find all strings in a C file capable of generating brainfuck code that could build
-	the desired string by replacing them with calls to a brainfuck interpreter on generated code. This could also
-	be extended to allowing for changes in the syntax of brainfuck so it does not immediately present itself as
-	brainfuck. Such as +++> could be replace with aaa! to add 3 to the current cell then move the head forward one
-	while maybe even possible to allow dynamic syntax where a symbol for an action with change each time it is used
-	turning into %^&M.
+	Expand the current method to hide strings with brainfuck code so it generates cleaner but more obscure code.
+	Such as using all symbols of the brainfuck language instead of just '+' and '>' while also randomly chosing
+	syntax to be semtantically the same. Ex: +++++>++ would become ^^^^^(^^
 	
 3:
 
@@ -27,7 +20,7 @@
 
 	Making c2 web control panel would be highly desirable but tedious to do. It should allow a UI that could show data
 	about an infected host and allow the user to choose from a list of payloads to send. Even better would be a way to
-	automate mass sequences of commands to one or more infected hosts.
+	automate mass sequences of commands to one or more infected hosts. (Maybe just create an easy to use TUI instead)
 	
 5:
 

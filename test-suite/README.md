@@ -1,22 +1,20 @@
 Tests:
 
 	   *SSDEEP - computes fuzzy hash of samael validating high uniqueness between compiled samples.
-	   Passing 'obfuscated' to the test script is necessary for a potential pass.
-	   ex: tests/ssdeep obfuscated
 
 	   *Reverse_shell - runs samael and delivers a reverse_shell payload then opens a netcat
-	   listener to validate shell connection. Passing 'obfuscated' to the test script is optional.
-	   ex: tests/reverse_shell.sh
+	   listener to validate shell connection.
 
 	   *Bind_shell - runs samael and delivers a bind_shell payload then opens a netcat
-	   connection to validate shell functionality. Passing 'obfuscated' to the test script is optional.
-	   ex: tests/bind_shell.sh obfuscated
+	   connection to validate shell functionality.
 
-	   *Run_all - runs the above test scripts together. Passing 'obfuscated' is optional but
-	   SSDEEP will fail since samael will always compute to the same hash
-	   ex: ./run_all.sh
+	   *Anti-debug - runs samael in r2, if samael detects any extra 0xCC's it will not infect and exit.
+	   This leaves samael in the current directory by not allowing it to delete itself indicating
+	   debugger presence detected.
+
+	   *Run_all - runs the above test scripts together.
 
 Notes:
 	   Due to inconsistencies between different linux distros you may need to sleep for 60
-	   seconds if you plan to run any of the test scripts, except ssdeep, back to back.
+	   seconds if you plan to run run_all.sh or any of the shell test scripts back to back.
 	   ex: ./run_all.sh; sleep 60; ./run_all.sh

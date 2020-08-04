@@ -1,37 +1,25 @@
 #!/bin/bash
 
-if [ ! -f "$1.bak" ]
-then
-    cat $1 > "$1.bak"
-fi
+cat $1 > "$1.bak"
 
 rm $1
 
-header=$(find /home -name obfuscator.h 2> /dev/null)
-
-header='#include "'$header'"'
-
-echo $header > $1
-
-counter=0
-
 lineNum="$(grep -n "{" "$1.bak" | head -n 1 | cut -d: -f1)"
 
-while read line; do
-    counter=$(( counter + 1 ))
-    if [ $counter -lt $(($lineNum - 1)) ]
+while read -r line; do
+    if [[  $lineNum == '' ]]
     then
-	rand=$((0 + RANDOM % 6))
-	if [ $rand == 4 ]
+	if [[ $line =~ "optimize(opt)" ]]
 	then
-	    rand="'s'"
-	fi
-	if [ $rand == 5 ]
-	then
-	    rand="'g'"
-	fi
-	if [[ $line =~ "(opt)" ]]
-	then	    
+	    rand=$((0 + RANDOM % 6))
+	    if [ $rand == 4 ]
+	    then
+		rand="'s'"
+	    fi
+	    if [ $rand == 5 ]
+	    then
+		rand="'g'"
+	    fi
 	    line=${line/(opt)/"($rand)"}
 	fi
     else
@@ -39,8 +27,7 @@ while read line; do
 	then
 	    rand=$(( 1 + RANDOM % 22))
 	    line=$line$(sed "${rand}q;d" ../tools/obfuscator/obfuscator.txt)
-	fi					    
+	fi
     fi
-    echo "${line}" >> $1
+    echo "$line" >> $1
 done < "$1.bak"
-    
