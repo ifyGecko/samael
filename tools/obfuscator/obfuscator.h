@@ -33,7 +33,7 @@ void __attribute__((naked)) foo(){
       ".byte 0x90\n\t");
 }
 
-void __attribute__((always_inline)) static inline desync0(){
+void __attribute__((always_inline)) static inline foobar_0(){
   int a = 13;
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"
@@ -64,7 +64,7 @@ void __attribute__((always_inline)) static inline desync0(){
 	       ::"r" (a));  
 }
 
-void __attribute__((always_inline)) static inline desync1(){
+void __attribute__((always_inline)) static inline foobar_1(){
   int a = 13;
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"
@@ -94,7 +94,7 @@ void __attribute__((always_inline)) static inline desync1(){
 	       ::"r" (a));  
 }
 
-void __attribute__((always_inline)) static inline desync2(){
+void __attribute__((always_inline)) static inline foobar_2(){
   int a = 13;
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"
@@ -124,7 +124,7 @@ void __attribute__((always_inline)) static inline desync2(){
 	       ::"r" (a));  
 }
 
-void __attribute__((always_inline)) static inline desync3(){
+void __attribute__((always_inline)) static inline foobar_3(){
   int a = 13;
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"
@@ -154,7 +154,7 @@ void __attribute__((always_inline)) static inline desync3(){
 	       ::"r" (a));  
 }
 
-void __attribute__((always_inline)) static inline desync4(){
+void __attribute__((always_inline)) static inline foobar_4(){
   int a = 13;
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"

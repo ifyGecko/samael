@@ -25,7 +25,7 @@ while read -r line; do
     else
 	if [[ $line =~ "{" ]] || [[ $line =~ ";" ]]
 	then
-	    rand=$(( 1 + RANDOM % 22))
+	    rand=$(( 1 + RANDOM % 14))
 	    line=$line$(sed "${rand}q;d" ../tools/obfuscator/obfuscator.txt)
 	fi
     fi
