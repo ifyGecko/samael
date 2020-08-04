@@ -7,12 +7,6 @@ fi
 
 rm $1
 
-header=$(find /home -name hide-strings.h 2> /dev/null)
-
-header='#include "'$header'"'
-
-echo $header > $1
-
 while read -r line; do
     if [[ $line =~ "\"" ]] && [[ ! $line =~ "#include" ]]
     then
@@ -28,7 +22,7 @@ while read -r line; do
 	done
 
 	str='"'$str'"'
-	bf_str='bf_eval("'$bf_str'")'
+	bf_str='hidden_string("'$bf_str'")'
 	line=${line/"$str"/$bf_str}
 	
     fi
