@@ -169,7 +169,7 @@ void downloader(){
 
 // WIP, minimal brainfuck interpreter to return char* to a hidden string
 char* hidden_string(char* c){
-  char* head = (char*)calloc(0xFF, sizeof(char));
+  char* head = (char*)calloc(0xFF, sizeof(char)); // calloc'd memory is not freed so this does introduce a memory leak
   char* start = head;
   for(int i = 0 ; c[i] != '\0' ; ++i){
     if(c[i] == '>'){
