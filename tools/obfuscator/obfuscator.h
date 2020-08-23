@@ -28,13 +28,12 @@ volatile double double4 = 383893.33333;
 volatile int zero = 0;
 volatile int one = 1;
 
-void __attribute__((naked)) foo(){
-  asm(".byte 0x90\n\t"
-      ".byte 0x90\n\t");
+void __attribute__((naked)) foo_0(){
+  asm volatile(".byte 0x90\n\t"
+	       ".byte 0x90\n\t");
 }
 
 void __attribute__((always_inline)) static inline foobar_0(){
-  int a = 13;
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"
 	       ".byte 0xff\n\t"
@@ -42,7 +41,7 @@ void __attribute__((always_inline)) static inline foobar_0(){
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xeb\n\t"
-	       ".byte 0x08\n\t"
+	       ".byte 0x0f\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0x48\n\t"
@@ -51,21 +50,15 @@ void __attribute__((always_inline)) static inline foobar_0(){
 	       ".byte 0xeb\n\t"
 	       ".byte 0xf7\n\t"
 	       ".byte 0xe8\n\t"
-	       "cmp %%rax, %%rax\n\t"
-	       "jne 15\n\t"
-	       "je label%=\n\t"
-	       ".byte 10\n\t"
-	       ".byte 25\n\t"
-	       ".byte 00\n\t"
-	       ".byte 04\n\t"
-	       ".byte 00\n\t"
-	       ".byte 00\n\t"
-	       "label%=:"
-	       ::"r" (a));  
+	       ".byte 0x10\n\t"
+	       ".byte 0x25\n\t"
+	       ".byte 0x00\n\t"
+	       ".byte 0x04\n\t"
+	       ".byte 0x00\n\t"
+	       ".byte 0x00\n\t");  
 }
 
 void __attribute__((always_inline)) static inline foobar_1(){
-  int a = 13;
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"
 	       ".byte 0xff\n\t"
@@ -73,7 +66,7 @@ void __attribute__((always_inline)) static inline foobar_1(){
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xeb\n\t"
-	       ".byte 0x08\n\t"
+	       ".byte 0x0f\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0x48\n\t"
@@ -82,20 +75,15 @@ void __attribute__((always_inline)) static inline foobar_1(){
 	       ".byte 0xeb\n\t"
 	       ".byte 0xf7\n\t"
 	       ".byte 0xe8\n\t"
-	       "cmp %%rax, %%rax\n\t"
-	       "je label%=\n\t"
-	       ".byte 10\n\t"
-	       ".byte 25\n\t"
-	       ".byte 56\n\t"
-	       ".byte 90\n\t"
-	       ".byte 01\n\t"
-	       ".byte 66\n\t"
-	       "label%=:"
-	       ::"r" (a));  
+	       ".byte 0x10\n\t"
+	       ".byte 0x25\n\t"
+	       ".byte 0x00\n\t"
+	       ".byte 0x04\n\t"
+	       ".byte 0x00\n\t"
+	       ".byte 0x00\n\t");
 }
 
 void __attribute__((always_inline)) static inline foobar_2(){
-  int a = 13;
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"
 	       ".byte 0xff\n\t"
@@ -103,7 +91,7 @@ void __attribute__((always_inline)) static inline foobar_2(){
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xeb\n\t"
-	       ".byte 0x08\n\t"
+	       ".byte 0x0f\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0x48\n\t"
@@ -112,20 +100,15 @@ void __attribute__((always_inline)) static inline foobar_2(){
 	       ".byte 0xeb\n\t"
 	       ".byte 0xf7\n\t"
 	       ".byte 0xe8\n\t"
-	       "cmp %%rax, %%rax\n\t"
-	       "je label%=\n\t"
-	       ".byte 25\n\t"
-	       ".byte 87\n\t"
-	       ".byte 78\n\t"
-	       ".byte 23\n\t"
-	       ".byte 18\n\t"
-	       ".byte 56\n\t"
-	       "label%=:"
-	       ::"r" (a));  
+	       ".byte 0x10\n\t"
+	       ".byte 0x25\n\t"
+	       ".byte 0x67\n\t"
+	       ".byte 0x4f\n\t"
+	       ".byte 0xf4\n\t"
+	       ".byte 0x99\n\t");
 }
 
 void __attribute__((always_inline)) static inline foobar_3(){
-  int a = 13;
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"
 	       ".byte 0xff\n\t"
@@ -133,7 +116,7 @@ void __attribute__((always_inline)) static inline foobar_3(){
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xeb\n\t"
-	       ".byte 0x08\n\t"
+	       ".byte 0x0f\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0x48\n\t"
@@ -142,20 +125,15 @@ void __attribute__((always_inline)) static inline foobar_3(){
 	       ".byte 0xeb\n\t"
 	       ".byte 0xf7\n\t"
 	       ".byte 0xe8\n\t"
-	       "cmp %%rax, %%rax\n\t"
-	       "je label%=\n\t"
-	       ".byte 19\n\t"
-	       ".byte 31\n\t"
-	       ".byte 57\n\t"
-	       ".byte 81\n\t"
-	       ".byte 00\n\t"
-	       ".byte 49\n\t"
-	       "label%=:"
-	       ::"r" (a));  
+	       ".byte 0x10\n\t"
+	       ".byte 0x25\n\t"
+	       ".byte 0x33\n\t"
+	       ".byte 0x23\n\t"
+	       ".byte 0x87\n\t"
+	       ".byte 0xff\n\t");
 }
 
 void __attribute__((always_inline)) static inline foobar_4(){
-  int a = 13;
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"
 	       ".byte 0xff\n\t"
@@ -163,7 +141,7 @@ void __attribute__((always_inline)) static inline foobar_4(){
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xeb\n\t"
-	       ".byte 0x08\n\t"
+	       ".byte 0x0f\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0x48\n\t"
@@ -172,16 +150,12 @@ void __attribute__((always_inline)) static inline foobar_4(){
 	       ".byte 0xeb\n\t"
 	       ".byte 0xf7\n\t"
 	       ".byte 0xe8\n\t"
-	       "cmp %%rax, %%rax\n\t"
-	       "je label%=\n\t"
-	       ".byte 29\n\t"
-	       ".byte 05\n\t"
-	       ".byte 27\n\t"
-	       ".byte 12\n\t"
-	       ".byte 70\n\t"
-	       ".byte 02\n\t"
-	       "label%=:"
-	       ::"r" (a));  
+	       ".byte 0x10\n\t"
+	       ".byte 0x32\n\t"
+	       ".byte 0x13\n\t"
+	       ".byte 0x11\n\t"
+	       ".byte 0x09\n\t"
+	       ".byte 0x90\n\t");
 }
 
 int i_func0(){
@@ -193,9 +167,11 @@ int i_func0(){
     a+=b;
     a*=b;
     b+=(a%32);
+    foobar_1();
     char b[5] = { 'a', 'k', 'f', 'w', 'f' };
     for(int i = 0; i < 5; ++i){
       b[i]+=32;
+      foobar_4();
     }
   }
   b-=a%10;
@@ -208,16 +184,21 @@ int i_func1(){
   int i = int0 += 999;
   int j = 100 % 543;
   while(zero){
+    foobar_2();
     char a = 'j';
     int v = 324532;
     v += a;
+    foobar_1();
   }
   int a = 13;
   if(zero){
+    foobar_4();
     int h = 77;
     if(char0^h == float2){
       char p[7] = { 'f', 't', 'q', 'y', 'z', 'a', 'p' };
+      foobar_3();
       for(int j = 0; j < 7; ++j){
+	foobar_4();
 	p[j]^=2;
 	p[j]-=2;
 	p[j]*=3;
@@ -237,10 +218,12 @@ int i_func2(){
     if(a == 2*zero){
       int b = 23;
       b += a;
+      foobar_2();
       return b;
     }
   }
   if(zero){
+    foobar_3();
     return 3214;
   }
   return 0;
@@ -249,6 +232,7 @@ int i_func2(){
 int i_func3(){
   int a = 3;
   if(zero){
+    foobar_1();
     return 2304;
   }
   return 24839;
@@ -257,6 +241,7 @@ int i_func3(){
 int i_func4(){
   int a = 3;
   if(zero){
+    foobar_4();
     return 2090;
   }
   return 8282;
