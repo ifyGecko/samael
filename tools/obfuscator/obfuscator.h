@@ -158,7 +158,7 @@ void __attribute__((always_inline)) static inline foobar_4(){
 	       ".byte 0x90\n\t");
 }
 
-void __attribute__((always_inline)) static inline func0(){
+void func0(){
   volatile int a = 66;
   volatile int b = 44;
   a+=b;
@@ -179,7 +179,7 @@ void __attribute__((always_inline)) static inline func0(){
   a*=2;
 }
 
-void __attribute__((always_inline)) static inline func1(){
+void func1(){
   volatile int i = int0 += 999;
   volatile int j = 100 % 543 + int3;
   while(zero){
@@ -211,7 +211,7 @@ void __attribute__((always_inline)) static inline func1(){
   a += int3^char0;
 }
 
-void __attribute__((always_inline)) static inline func2(){
+void func2(){
   volatile int a = 24532 - char4;
   while(zero){
     if(a == 2*zero){
@@ -228,7 +228,7 @@ void __attribute__((always_inline)) static inline func2(){
   }
 }
 
-void __attribute__((always_inline)) static inline func3(){
+void func3(){
   volatile int a = 3;
   volatile char b = '*';
   if(zero){
@@ -240,7 +240,7 @@ void __attribute__((always_inline)) static inline func3(){
   a = b = a * 24839 * b;
 }
 
-void __attribute__((always_inline)) static inline func4(){
+void func4(){
   volatile int a = 3;
   if(zero){
     foobar_4();
