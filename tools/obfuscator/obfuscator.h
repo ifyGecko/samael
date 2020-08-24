@@ -158,9 +158,9 @@ void __attribute__((always_inline)) static inline foobar_4(){
 	       ".byte 0x90\n\t");
 }
 
-int i_func0(){
-  int a = 66;
-  int b = 44;
+void __attribute__((always_inline)) static inline func0(){
+  volatile int a = 66;
+  volatile int b = 44;
   a+=b;
   if(zero){
     b-=12321;
@@ -168,7 +168,7 @@ int i_func0(){
     a*=b;
     b+=(a%32);
     foobar_1();
-    char b[5] = { 'a', 'k', 'f', 'w', 'f' };
+    volatile char b[5] = { 'a', 'k', 'f', 'w', 'f' };
     for(int i = 0; i < 5; ++i){
       b[i]+=32;
       foobar_4();
@@ -177,25 +177,24 @@ int i_func0(){
   b-=a%10;
   b+=b;
   a*=2;
-  return a+=b;
 }
 
-int i_func1(){
-  int i = int0 += 999;
-  int j = 100 % 543;
+void __attribute__((always_inline)) static inline func1(){
+  volatile int i = int0 += 999;
+  volatile int j = 100 % 543 + int3;
   while(zero){
     foobar_2();
-    char a = 'j';
-    int v = 324532;
+    volatile char a = 'j';
+    volatile int v = 324532 - char2;
     v += a;
     foobar_1();
   }
-  int a = 13;
+  volatile int a = 13;
   if(zero){
     foobar_4();
-    int h = 77;
+    volatile int h = 77;
     if(char0^h == float2){
-      char p[7] = { 'f', 't', 'q', 'y', 'z', 'a', 'p' };
+      volatile char p[7] = { 'f', 't', 'q', 'y', 'z', 'a', 'p' };
       foobar_3();
       for(int j = 0; j < 7; ++j){
 	foobar_4();
@@ -205,46 +204,50 @@ int i_func1(){
       }
     }
   }else{
-    float l = 111.9403;
-    char m = 'm';
+    volatile float l = 111.9403;
+    volatile char m = 'm';
     l = j * l + m;
   }
-  return int3^char0;
+  a += int3^char0;
 }
 
-int i_func2(){
-  int a = 24532;
+void __attribute__((always_inline)) static inline func2(){
+  volatile int a = 24532 - char4;
   while(zero){
     if(a == 2*zero){
-      int b = 23;
+      volatile int b = 23 + char1;
       b += a;
       foobar_2();
-      return b;
+      b += 888;
+      foobar_0();
     }
   }
   if(zero){
     foobar_3();
-    return 3214;
+    a = 3214 / 99;
   }
-  return 0;
 }
 
-int i_func3(){
-  int a = 3;
+void __attribute__((always_inline)) static inline func3(){
+  volatile int a = 3;
+  volatile char b = '*';
   if(zero){
     foobar_1();
-    return 2304;
+    a = 2304;
+    foobar_2();
+    foobar_3();
   }
-  return 24839;
+  a = b = a * 24839 * b;
 }
 
-int i_func4(){
-  int a = 3;
+void __attribute__((always_inline)) static inline func4(){
+  volatile int a = 3;
   if(zero){
     foobar_4();
-    return 2090;
+    a = 2090;
+    foobar_0();
   }
-  return 8282;
+  a = 8282 % 23;
 }
 
 #endif
