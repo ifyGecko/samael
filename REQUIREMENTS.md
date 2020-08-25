@@ -5,7 +5,7 @@ tools are installed.
 
 Build:
 
-	make gcc gccgo
+	make gcc
 
 Test:
 

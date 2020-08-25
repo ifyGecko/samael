@@ -9,9 +9,7 @@ Disclaimer:
 Features:
 
 	* prepending ELF virus
-	* remote code execution via downloaded shared object payloads
-	* reverse/bind shell payloads
+	* spawns reverse shell
 	* random junk code insertion
 	* optimization levels applied randomly per function
-	* minimal command & control server
 	* int3, breakpoint, scanner

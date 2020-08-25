@@ -5,11 +5,8 @@ Tests:
 	   *Reverse_shell - runs samael and delivers a reverse_shell payload then opens a netcat
 	   listener to validate shell connection.
 
-	   *Bind_shell - runs samael and delivers a bind_shell payload then opens a netcat
-	   connection to validate shell functionality.
-
-	   *Anti-debug - runs samael in r2, if samael detects any extra 0xCC's it will not infect and exit.
-	   This leaves samael in the current directory by not allowing it to delete itself indicating
+	   *Anti-debug - runs samael in r2, if samael detects any extra 0xCC's it will exit. This
+	   leaves samael in the current directory by not allowing it to delete itself indicating
 	   debugger presence detected.
 
 	   *Run_all - runs the above test scripts together.
