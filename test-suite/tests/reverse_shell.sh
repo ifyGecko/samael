@@ -12,7 +12,7 @@ make clean > /dev/null
 make > /dev/null
 ./samael > /dev/null
 ./test > /dev/null
-output=$((echo -e "whoami\n" | nc -w 1 -lp 1337 ) 2> /dev/null)
+output=$((echo -e 'whoami\nexit' | nc -lvp 1337) 2> /dev/null)
 if [ "$output" != "$user" ]
 then
     echo "[X] Reverse Shell Test Failed"
