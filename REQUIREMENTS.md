@@ -5,15 +5,8 @@ tools are installed.
 
 Build:
 
-	make gcc
+	make gcc netcat bash awk sed
 
 Test:
 
 	ssdeep radare2
-
-Note:
-
-	Other tools may be required if your distribution does not include them
-	by default. An example of this would be bash, netcat, sed, or awk but
-	since most common distributions include these by default they are not
-	included above.
