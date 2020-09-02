@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # get the number of 0xCC's from the text section of samael
-x=$(objdump -s -j .text samael | grep cc | cut -c 7- | cut -c -36 | tr -d "[:blank:]" | \
+x=$(objdump -s -j .text samael | grep cc | cut -c 9- | cut -c -35 | tr -d "[:blank:]" | \
     sed 's/.\{2\}/& /g' | sed -n '/cc/p' | grep -o "cc" | wc -l)
 
 # place this number in the correct macro definition to know how many 0xCC's should be present
