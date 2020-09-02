@@ -155,8 +155,8 @@ char* hidden_string(char* c){
 // scans executable code segments for int3 instructions, 0xCC, and exits if one is found
 void detect_breakpoints(){
   int counter = 0;
-  char* start = (char*)&_start;                             
-  char* end = (char*)&__etext;
+  char* start = (char*)&_start; // starting address of the .text section
+  char* end = (char*)&__etext;  // starting address of the .fini section
 
   // use half of 0xCC to not hardcode a 0xCC 
   volatile unsigned char int3 = 0x66;
