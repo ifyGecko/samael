@@ -28,29 +28,24 @@ volatile double double4 = 383893.33333;
 volatile int zero = 0;
 volatile int one = 1;
 
-void __attribute__((naked)) foo_0(){
-  asm volatile(".byte 0x90\n\t"
-	       ".byte 0x90\n\t");
-}
-
 void __attribute__((always_inline)) static inline foobar_0(){
-  asm volatile(".byte 0x48\n\t"
-	       ".byte 0xb8\n\t"
+  asm volatile(".byte 0x36\n\t"
+	       ".byte 0xb2\n\t"
+	       ".byte 0x33\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
+	       ".byte 0xf4\n\t"
 	       ".byte 0xeb\n\t"
 	       ".byte 0x0f\n\t"
-	       ".byte 0xff\n\t"
+	       ".byte 0x56\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0x48\n\t"
-	       ".byte 0x31\n\t"
+	       ".byte 0x23\n\t"
 	       ".byte 0xc0\n\t"
-	       ".byte 0xeb\n\t"
+	       ".byte 0xee\n\t"
 	       ".byte 0xf7\n\t"
 	       ".byte 0xe8\n\t"
-	       ".byte 0x10\n\t"
+	       ".byte 0xff\n\t"
 	       ".byte 0x25\n\t"
 	       ".byte 0x00\n\t"
 	       ".byte 0x04\n\t"
@@ -61,70 +56,70 @@ void __attribute__((always_inline)) static inline foobar_0(){
 void __attribute__((always_inline)) static inline foobar_1(){
   asm volatile(".byte 0x48\n\t"
 	       ".byte 0xb8\n\t"
+	       ".byte 0x77\n\t"
+	       ".byte 0x89\n\t"
 	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
+	       ".byte 0x00\n\t"
 	       ".byte 0xeb\n\t"
 	       ".byte 0x0f\n\t"
-	       ".byte 0xff\n\t"
+	       ".byte 0x90\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0x48\n\t"
-	       ".byte 0x31\n\t"
+	       ".byte 0x22\n\t"
 	       ".byte 0xc0\n\t"
-	       ".byte 0xeb\n\t"
+	       ".byte 0xea\n\t"
 	       ".byte 0xf7\n\t"
 	       ".byte 0xe8\n\t"
-	       ".byte 0x10\n\t"
+	       ".byte 0x11\n\t"
 	       ".byte 0x25\n\t"
 	       ".byte 0x00\n\t"
 	       ".byte 0x04\n\t"
-	       ".byte 0x00\n\t"
+	       ".byte 0x09\n\t"
 	       ".byte 0x00\n\t");
 }
 
 void __attribute__((always_inline)) static inline foobar_2(){
-  asm volatile(".byte 0x48\n\t"
+  asm volatile(".byte 0x49\n\t"
 	       ".byte 0xb8\n\t"
+	       ".byte 0xfe\n\t"
 	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
+	       ".byte 0xfa\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xeb\n\t"
-	       ".byte 0x0f\n\t"
+	       ".byte 0x0a\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
-	       ".byte 0x48\n\t"
+	       ".byte 0xa8\n\t"
 	       ".byte 0x31\n\t"
-	       ".byte 0xc0\n\t"
+	       ".byte 0xa0\n\t"
 	       ".byte 0xeb\n\t"
 	       ".byte 0xf7\n\t"
 	       ".byte 0xe8\n\t"
-	       ".byte 0x10\n\t"
-	       ".byte 0x25\n\t"
+	       ".byte 0x1a\n\t"
+	       ".byte 0x11\n\t"
 	       ".byte 0x67\n\t"
-	       ".byte 0x4f\n\t"
+	       ".byte 0x44\n\t"
 	       ".byte 0xf4\n\t"
 	       ".byte 0x99\n\t");
 }
 
 void __attribute__((always_inline)) static inline foobar_3(){
   asm volatile(".byte 0x48\n\t"
-	       ".byte 0xb8\n\t"
+	       ".byte 0xbb\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
+	       ".byte 0xfb\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xeb\n\t"
-	       ".byte 0x0f\n\t"
+	       ".byte 0xbb\n\t"
 	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
+	       ".byte 0xaa\n\t"
 	       ".byte 0x48\n\t"
 	       ".byte 0x31\n\t"
-	       ".byte 0xc0\n\t"
-	       ".byte 0xeb\n\t"
-	       ".byte 0xf7\n\t"
-	       ".byte 0xe8\n\t"
+	       ".byte 0xce\n\t"
+	       ".byte 0xee\n\t"
+	       ".byte 0xff\n\t"
+	       ".byte 0x88\n\t"
 	       ".byte 0x10\n\t"
 	       ".byte 0x25\n\t"
 	       ".byte 0x33\n\t"
@@ -134,31 +129,31 @@ void __attribute__((always_inline)) static inline foobar_3(){
 }
 
 void __attribute__((always_inline)) static inline foobar_4(){
-  asm volatile(".byte 0x48\n\t"
-	       ".byte 0xb8\n\t"
-	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
-	       ".byte 0xff\n\t"
+  asm volatile(".byte 0x40\n\t"
+	       ".byte 0xb0\n\t"
+	       ".byte 0xf0\n\t"
+	       ".byte 0x0f\n\t"
+	       ".byte 0x0f\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0xeb\n\t"
 	       ".byte 0x0f\n\t"
-	       ".byte 0xff\n\t"
+	       ".byte 0x0f\n\t"
 	       ".byte 0xff\n\t"
 	       ".byte 0x48\n\t"
-	       ".byte 0x31\n\t"
-	       ".byte 0xc0\n\t"
+	       ".byte 0x41\n\t"
+	       ".byte 0x40\n\t"
 	       ".byte 0xeb\n\t"
 	       ".byte 0xf7\n\t"
-	       ".byte 0xe8\n\t"
+	       ".byte 0x48\n\t"
 	       ".byte 0x10\n\t"
-	       ".byte 0x32\n\t"
+	       ".byte 0x42\n\t"
 	       ".byte 0x13\n\t"
-	       ".byte 0x11\n\t"
+	       ".byte 0x41\n\t"
 	       ".byte 0x09\n\t"
 	       ".byte 0x90\n\t");
 }
 
-void func0(){
+void __attribute__((always_inline)) static inline func0(){
   volatile int a = 66;
   volatile int b = 44;
   a+=b;
@@ -179,7 +174,7 @@ void func0(){
   a*=2;
 }
 
-void func1(){
+void __attribute__((always_inline)) static inline func1(){
   volatile int i = int0 += 999;
   volatile int j = 100 % 543 + int3;
   while(zero){
@@ -211,7 +206,7 @@ void func1(){
   a += int3^char0;
 }
 
-void func2(){
+void __attribute__((always_inline)) static inline func2(){
   volatile int a = 24532 - char4;
   while(zero){
     if(a == 2*zero){
@@ -228,7 +223,7 @@ void func2(){
   }
 }
 
-void func3(){
+void __attribute__((always_inline)) static inline func3(){
   volatile int a = 3;
   volatile char b = '*';
   if(zero){
@@ -240,7 +235,7 @@ void func3(){
   a = b = a * 24839 * b;
 }
 
-void func4(){
+void __attribute__((always_inline)) static inline func4(){
   volatile int a = 3;
   if(zero){
     foobar_4();
