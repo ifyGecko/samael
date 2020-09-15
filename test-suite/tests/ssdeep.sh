@@ -24,3 +24,5 @@ else
 fi
 
 rm /tmp/hashes.txt
+
+rm ./test
