@@ -13,7 +13,7 @@
 	
 3:
 
-	This one is short and simple implement more anti-debugging techniques such as ptrace, 0xEBFE instruction scanner,
+	This one is short and simple implement more anti-debugging techniques such as 0xEBFE instruction scanner,
 	user definted interrupts and any other idea that could be thought of.
 	
 4:
@@ -26,7 +26,7 @@
 
 	It should be realatively easy to integrate torsocks for c2 comm. Hopefully all that would be needed to implement
 	and test is statically link libtorsocks to samael and set up the c2 to run as a hidden service with the hostname
-	set to this hidden service in the samael source code.
+	set to this hidden service in the samael source code. (Encrypted c2 comm should be implemented first)
 	
 6:
 
