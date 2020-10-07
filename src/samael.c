@@ -200,3 +200,10 @@ void detect_breakpoints(){
     exit(0); // exit program if a breakpoint is detected, maybe adjust to delete executable file instead??
   }
 }
+
+// ptrace is commonly used for debugging, ptrace returns -1 if the process is already being traced i.e. debugged
+void detect_ptrace(){
+  if(ptrace(PTRACE_TRACEME, 0, 1, 0) != 0){
+    exit(0);
+  }
+}
