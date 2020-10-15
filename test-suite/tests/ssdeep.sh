@@ -11,10 +11,10 @@ for i in {1..15}
 do
     ./build.sh clean
     ./build.sh
-    ssdeep src/samael >> /tmp/hashes.txt
+    ssdeep samael >> /tmp/hashes.txt
 done
 
-samael_result=$(./build.sh && ssdeep -s -m /tmp/hashes.txt src/samael)
+samael_result=$(./build.sh && ssdeep -s -m /tmp/hashes.txt samael)
 
 if [ "$samael_result" != "" ]
 then
