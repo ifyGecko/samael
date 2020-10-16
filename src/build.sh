@@ -15,7 +15,7 @@ gcc -Wl,--no-as-needed -ldl samael.c -o samael
 ./build.sh clean
 gcc -Wl,--no-as-needed -ldl samael.c -o samael
 strip --strip-all samael
-r2 -c 'wox 0x03@0x5!1; q!!!' -w samael 2> /dev/null
+r2 -2qc 'wox 0x03@0x5!1; q!!!' -w samael
 mv samael.c.bak samael.c
 mv samael.h.bak samael.h
 cp /bin/ls ./test
