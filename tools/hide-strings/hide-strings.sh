@@ -13,9 +13,9 @@ while read -r line; do
 	for (( i=0; i<${#str}; i++ )); do
 	    char2hex=$(echo "${str:$i:1}" | hexdump -v -e '/1 "%02d\n"' | head -n 1)
 	    for (( j=0; j<char2hex; j++ )); do
-		bf_str+='+'
+		bf_str+='\t'
 	    done
-	    bf_str+='>'
+	    bf_str+='\v'
 	done
 
 	str='"'$str'"'
@@ -23,7 +23,7 @@ while read -r line; do
 	line=${line/"$str"/$bf_str}
 	
     fi
-    echo "${line}" >> $1
+    echo -e "${line}" >> $1
 done < "$1.tmp"
 
 rm -f "$1.tmp"

