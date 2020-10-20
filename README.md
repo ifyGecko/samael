@@ -1,5 +1,5 @@
 # samael
-PoC Linux Malware
+PoC Linux Implant
 
 Disclaimer:
 
