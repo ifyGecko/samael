@@ -13,9 +13,9 @@ while read -r line; do
 	for (( i=0; i<${#str}; i++ )); do
 	    char2hex=$(echo "${str:$i:1}" | hexdump -v -e '/1 "%02d\n"' | head -n 1)
 	    for (( j=0; j<char2hex; j++ )); do
-		bf_str+='\t'
+		bf_str+=' '
 	    done
-	    bf_str+='\v'
+	    bf_str+='\b'
 	done
 
 	str='"'$str'"'
