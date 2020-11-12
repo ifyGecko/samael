@@ -172,7 +172,7 @@ char* hidden_string(char* c){
   char* head = (char*)calloc(0xFF, sizeof(char)); // calloc'd memory is not freed so this does introduce a memory leak
   char* start = head;
   for(int i = 0; c[i] != 0x00; ++i){ // gcc warns null character in literall if '\0' is used
-    if(c[i] == '\b'){ // using horizontal/vertical tabs so bf isn't as obvious
+    if(c[i] == '\b'){ // using spaces/backspaces so bf isn't as obvious
       ++head;
     }else if(c[i] == ' '){
       ++*head;
