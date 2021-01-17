@@ -207,3 +207,10 @@ void detect_ptrace(){
     exit(0);
   }
 }
+
+// if /sys/class/thermal/thermal_zone0/temp doesn't exist it is most likely running in a virtual machine (AFAIK ATM...more research needed)
+void detect_vm(){
+  if(access("/sys/class/thermal/thermal_zone0/temp", F_OK) != 0){
+    exit(0);
+  }
+}

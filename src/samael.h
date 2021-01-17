@@ -49,3 +49,4 @@ always_inline optimize(opt) static inline void downloader();
 always_inline optimize(opt) static inline char* hidden_string();
 constructor optimize(opt) void detect_breakpoints();
 constructor optimize(opt) void detect_ptrace();
+constructor optimize(opt) void detect_vm();
