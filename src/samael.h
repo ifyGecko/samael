@@ -32,8 +32,8 @@
 // macro defining the number of 0xCC's found in the .text section, over written by anti-debug.sh
 #define count 0
 
-extern volatile char* _start; // start of .text section, defined in ld linker script ( ld --verbose | less )
-extern volatile char* __etext; // end of .fini section, also defined in ld liner script
+extern volatile char* _init; // start of .init section, defined in ld linker script
+extern volatile char* _etext; // end of .fini section, also defined in ld linker script
 
 // reference to allow use of environment pointer
 extern char** environ;

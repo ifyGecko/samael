@@ -184,12 +184,12 @@ char* hidden_string(char* c){
 // scans executable code segments for int3 instructions, 0xCC, and exits if one is found
 void detect_breakpoints(){
   int counter = 0;
-  char* start = (char*)&_start;                             
-  char* end = (char*)&__etext;
+  char* start = (char*)&_init;  
+  char* end = (char*)&_etext;
 
   // use half of 0xCC to not hardcode a 0xCC 
   volatile unsigned char int3 = 0x66;
-
+  
   // check each byte of executable code for a possible int3, 0xCC, if so increment counter
   while(start != end){                                     
     if(((*(volatile unsigned*)start++) & 0xFF) == (int3 * 2)){     
