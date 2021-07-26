@@ -18,30 +18,20 @@
 	
 4:
 
-	Making c2 web control panel would be highly desirable but tedious to do. It should allow a UI that could show data
-	about an infected host and allow the user to choose from a list of payloads to send. Even better would be a way to
-	automate mass sequences of commands to one or more infected hosts. (Maybe just create an easy to use TUI instead)
+	Improve C2 and give it a useful CLI for managing old and new connecting hosts.
 	
 5:
-
-	It should be realatively easy to integrate torsocks for c2 comm. Hopefully all that would be needed to implement
-	and test is statically link libtorsocks to samael and set up the c2 to run as a hidden service with the hostname
-	set to this hidden service in the samael source code. (Encrypted c2 comm should be implemented first)
-	
-6:
 
 	It is a main goal of this project to compile rather different binaries each time you build the project. So support
 	for other C compilers (clang & tcc) could give use even more variety that just using gcc. Maybe this could fix how
 	if you run the ssdeep test multiple times back to back you can actually get a failure meaning we managed to build
 	a binary that is rather similar at the binary level to a previous build only a handful of compilations before it.
 
+6:
+
+	A bit of research will probably be needed to implement encryption of infected host to c2 network traffic.
+
 7:
-
-	A good bit of research will be desired and probably need to implement encryption of infected host to c2 network
-	traffic. Despite even if torsocks is useful and intergrated into samael we will still have traffic that is easily
-	analyses at entry and exit nodes.
-
-8:
 
 	Turning samael and its way of infection into a rudamentary packer would be useful. Maybe not the most practical
 	way but would definetly be strange to have a virus pack itself multuple times with itself giving a Matryoshka doll
