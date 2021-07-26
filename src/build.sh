@@ -2,9 +2,12 @@
 
 if [[ "$1" == "clean" ]];
 then
+    echo "cleaning..."
     rm -f samael test
     exit 0
 fi
+
+echo "building..."
 
 ../tools/obfuscator/obfuscator.sh samael.c
 ../tools/obfuscator/obfuscator.sh samael.h
