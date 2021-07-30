@@ -14,7 +14,7 @@
 3:
 
 	This one is short and simple implement more anti-debugging techniques such as 0xEBFE instruction scanner,
-	user definted interrupts and any other idea that could be thought of.
+	user defined interrupts and any other idea that could be thought of.
 	
 4:
 
