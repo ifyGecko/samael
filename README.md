@@ -15,3 +15,4 @@ Features:
 	* optimization levels applied randomly per function
 	* minimal command & control server
 	* int3, breakpoint, scanner
+	* vm detection via temp readings
